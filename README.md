@@ -67,59 +67,30 @@ US10 : En tant que PROPRIETAIRE
       je souhaite pouvoir gérer les membres qui participent à un projet que j'ai créé. Dans la liste de mes projets, les projets dont je suis propriétaire auraient à proximité un bouton "Gérer" permettant leur gestion. En appuyant dessus, je suis redirigé vers la page de gestion des membres du projet. Cette page contient deux groupes : "Clients" et "Développeurs". Chaque groupe est associé à une barre de recherche : les utilisateurs sont recherchés par leur login en fonction de mot-clés, et le résultat de la recherche est affiché sous la forme d'une liste. A partir de cette liste, je peux alors choisir quel(s) utilisateur(s) ajouter au groupe associé sur le projet dont je suis propriétaire. En bas de la page, des boutons "Sauvegarder" et "Retour" sont affichés. L'appui sur le bouton "Sauvegarder" met à jour les modifications réalisées, l'appui sur le bouton "Retour" ne prend en compte aucune modification et me redirige vers la page de mes projets.
       Afin de gérer l'organisation d'un projet, je souhaite que cette fonctionnalité soit réalisée.
 
-US3 : En tant que DÉVELOPPEUR
-      je souhaite créer une issue. Après mon authentification, le logiciel proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur ISSUES, il y a la liste des issues et un bouton AJOUTER en haut. En cliquant sur celui-ci, une fenêtre pop-up s'ouvrirait qui afficherait les champs suivant à remplir : EN TANT QUE, JE SOUHAITE et AFIN DE. Tant que tous ces champs ne sont pas remplis, le bouton "VALIDER" de cette fenêtre serait grisé. Une fois la validation possible, l'issue est ajoutée à la liste des issues.
-      afin d'ajouter des issues à ma liste d'issue.
+************************************************************************************************************************************
 
-US4 : En tant que DÉVELOPPEUR
-      je souhaite modifier une issue. Après mon authentification, le logiciel proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur les ISSUES, il y a la liste des issues et un bouton MODIFIER pour chaque issue. En cliquant sur celui-ci, le site ouvrirait une fenêtre pop-up avec tous les champs (EN TANT QUE, JE SOUHAITE et AFIN DE) éditables.  
-      afin de corriger des erreurs.
-
-US5 : En tant que DÉVELOPPEUR
-      je souhaite avoir accès à mes issues
-      afin de pouvoir les supprimer.
-
-US6 : En tant que CLIENT
-      je souhaite avoir accès aux issues
-      afin de pouvoir les prioriser.
-
-US7 : En tant que DÉVELOPPEUR
-      je souhaite créer une tâche. Après mon authentification, le logiciel proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur les TÂCHES, il y a une liste des tâches et un bouton AJOUTER en haut. En cliquant sur celui-ci, le logiciel ouvrirait une fenêtre pop-up avec un seul champ TÂCHE. Tant que ce champ n'est pas rempli, le bouton VALIDER sera grisé. Une fois la validation possible, la tâche sera ajoutée à la liste de tâche
-      afin d'ajouter des tâches à ma liste de tâches.
-
-US8 : En tant que DÉVELOPPEUR
-      je souhaite avoir accès à mes tâches
-      afin de pouvoir les modifier.
-
-US9 : En tant que DÉVELOPPEUR
-      je souhaite avoir accès à mes tâches
-      afin de pouvoir les supprimer.
-
-US10 : En tant que DÉVELOPPEUR
-       je souhaite avoir accès à mes tâches
-       afin de pouvoir les prioriser.
+DÉVELOPPEUR
 
 US11 : En tant que DÉVELOPPEUR
-       je souhaite avoir accès à mes releases
-       afin de pouvoir comparer différentes releases.
+      je souhaite créer une issue. Après avoir sélectionné un projet, l'outil me reconduirait vers une nouvelle fenêtre. Celle-ci me proposerait un menu sur le côté gauche avec les boutons ISSUES, TÂCHES, RELEASES, TESTS et DOCUMENTATION. Lorsque je clique sur ISSUES, une liste des issues et un bouton AJOUTER en haut s'affichent. En cliquant sur celui-ci, une fenêtre pop-up s'ouvrirait qui afficherait les champs suivant à remplir : EN TANT QUE, JE SOUHAITE et AFIN DE. Tant que tous ces champs ne sont pas remplis, le bouton "VALIDER" de cette fenêtre serait grisé. Une fois la validation possible, l'issue est ajoutée à la liste des issues.
+      Afin d'ajouter des issues à mon projet, je souhaite que cette fonctionnalité soit réalisée.
 
 US12 : En tant que DÉVELOPPEUR
-       je souhaite créer un test. Après mon authentification, le logiciel proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur les TESTS, il y a une liste de tests et un bouton AJOUTER en haut. En cliquant sur celui-ci, le logiciel ouvrirait une fenêtre pop-up qui afficherait les champs suivants : GIVEN, WHEN et THEN. Il y aurait des petits boutons "+" après les champs GIVEN et THEN pour ajouter des champs AND. Tant que tous les champs ne sont pas remplis, le bouton VALIDER sera grisé. Une fois la validation possible, le test sera ajouté à la liste de tests.
-       afin d'ajouter des tests.
+      je souhaite créer une tâche. Après avoir sélectionné un projet, l'outil me reconduirait vers une nouvelle fenêtre. Celle-ci me proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur les TÂCHES, la liste des tâches et un bouton AJOUTER en haut s'affichent. En cliquant sur celui-ci, le logiciel ouvrirait une fenêtre pop-up avec un seul champ TÂCHE. Tant que ce champ n'est pas rempli, le bouton VALIDER sera grisé. Une fois la validation possible, la tâche sera ajoutée à la liste de tâche.
+      Afin d'ajouter des tâches à mon projet, je souhaite que cette fonctionnalité soit réalisée.
 
 US13 : En tant que DÉVELOPPEUR
-       je souhaite avoir accès à mes tests
-       afin de pouvoir les modifier.
+       je souhaite créer un test. Après avoir sélectionné un projet, l'outil me reconduirait vers une nouvelle fenêtre. Celle-ci me proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur les TESTS, la liste de tests et un bouton AJOUTER en haut s'affichent. En cliquant sur celui-ci, le logiciel ouvrirait une fenêtre pop-up qui afficherait les champs suivants : GIVEN, WHEN et THEN. Il y aurait des petits boutons "+" après les champs GIVEN et THEN pour ajouter des champs AND. Tant que tous les champs ne sont pas remplis, le bouton VALIDER sera grisé. Une fois la validation possible, le test sera ajouté à la liste de tests.
+       Afin d'ajouter des tests à mon projet, je souhaite que cette fonctionnalité soit réalisée.
 
 US14 : En tant que DÉVELOPPEUR
-       je souhaite avoir accès à mes tests
-       afin de pouvoir les supprimer.
+       je souhaite modifier mes issues/tâches/tests. Après avoir sélectionné un projet, l'outil me reconduirait vers une nouvelle fenêtre. Celle-ci me proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur les ISSUES/TÂCHES/TESTS , la liste des issues/tâches/tests s'affiche avec à proximité de chacun d'eux un bouton MODIFIER. En cliquant sur celui-ci, une fenêtre pop-up s'afficherait contenant les champs de l'issue/tâche/test correspondant. Ces champs seraient éditables. En cliquant sur le bouton VALIDER en bas de la page, les modifications seraient sauvegardées et je serais reconduit vers la liste des issues/tâches/tests.
+       Afin de modifier mes issues/tâches/tests, je souhaite que cette fonctionnalité soit réalisée.
 
 US15 : En tant que DÉVELOPPEUR
-       je souhaite créer une documentation. Après mon authentification, le logiciel proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur la DOCUMENTATION, il y a une liste de documentation et un bouton AJOUTER en haut.
-
-       afin de pouvoir en créer.
+       je souhaite supprimer mes issues/tâches/tests. Après avoir sélectionné un projet, l'outil me reconduirait vers une nouvelle fenêtre. Celle-ci me proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur les ISSUES/TÂCHES/TESTS , la liste des issues/tâches/tests s'affiche avec à proximité de chacun d'eux un bouton SUPPRIMER. En cliquant sur celui-ci, une fenêtre pop-up s'afficherait contenant les boutons VALIDER et ANNULER et un message me demandant de confirmer. En cliquant sur le bouton VALIDER, l'issue/tâche/test correspondant serait supprimé et je serais reconduit vers la liste des issues/tâches/tests. Si j'appuie sur le bouton ANNULER, je suis reconduit vers la liste des issues/tâches/tests sans modification.
+       Afin de supprimer mes issues/tâches/tests, je souhaite que cette fonctionnalité soit réalisée.
 
 US16 : En tant que DÉVELOPPEUR
-       je souhaite avoir accès à ma documentation
-       afin de pouvoir les modifier.
+       je souhaite créer une documentation. Après avoir sélectionné un projet, l'outil me reconduirait vers une nouvelle fenêtre. Celle-ci me proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur la DOCUMENTATION, un champ texte éditable apparaît au centre. Lorsque je clique sur le bouton VALIDER en bas de la page, les modifications apportées sur ce texte sont sauvegardées et je suis reconduit sur la page d'accueil du projet correspondant.
+       Afin de mettre à jour la documentation de mon projet, je souhaite que cette fonctionnalité soit réalisée.
