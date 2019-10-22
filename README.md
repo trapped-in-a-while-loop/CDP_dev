@@ -94,3 +94,15 @@ US15 : En tant que DÉVELOPPEUR
 US16 : En tant que DÉVELOPPEUR
        je souhaite créer une documentation. Après avoir sélectionné un projet, l'outil me reconduirait vers une nouvelle fenêtre. Celle-ci me proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur la DOCUMENTATION, un champ texte éditable apparaît au centre. Lorsque je clique sur le bouton VALIDER en bas de la page, les modifications apportées sur ce texte sont sauvegardées et je suis reconduit sur la page d'accueil du projet correspondant.
        Afin de mettre à jour la documentation de mon projet, je souhaite que cette fonctionnalité soit réalisée.
+
+US17 : En tant que DEVELOPPEUR,
+       je souhaite réaliser une release. Après avoir sélectionné un projet, l'outil me reconduirait vers une nouvelle fenêtre. Celle-ci me proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur le bouton RELEASE, l'outil me proposerait, via une nouvelle fenêtre, une liste de release et le bouton "METTRE A JOUR" en haut. Pour chaque release on trouverait à proximité un bouton "TELECHARGER". En cliquant dessus, une fenetre pop-up apparait et me demande de confirmer le téléchargement ou de l'annuler via deux boutons. En confirmant, le téléchargement s'effectue et la fenêtre pop-up se ferme. En annulant, aucun téléchargement s'effectue et la fenêtre pop-up se ferme. En appuyant sur le bouton "METTRE A JOUR", une fenêtre pop-up s'ouvre et me propose de selectionner un fichier executable ou un lien sur mon poste de travail. En en selectionnant un, la fenêtre pop-up se ferme et il est maintenant possible de télécharger cet executable ou ce lien via le bouton "TELECHARGER" du nouvel élément présent dans la liste de release de la rubrique "RELEASE".
+       Afin de mettre à jour la release de mon projet, je souhaite que cette fonctionnalité soit réalisée.
+
+************************************************************************************************************************************
+
+CLIENT
+
+US18: En tant que CLIENT,
+        je souhaite visualiser les issues/tâches/tests/documentation du projet. Après avoir sélectionné un projet, l'outil me reconduirait vers une nouvelle fenêtre. Celle-ci me proposerait un menu sur le côté gauche avec les ISSUES, les TÂCHES, les RELEASES, les TESTS et la DOCUMENTATION. Lorsque je clique sur le bouton ISSUES/TACHES/TESTS/DOCUMENTATION, le contenu correspondant s'affiche. Aucun bouton est disponible et le contenu est sous format texte non editable.
+        Afin de visualiser l'avancement du projet, je souhaite que cette fonctionnalité soit réalisé.
