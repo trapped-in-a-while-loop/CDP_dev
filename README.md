@@ -1,14 +1,51 @@
 # CDP_dev
 
-VISITEUR : il n'a qu'un accès en lecture seule du logiciel. Il peut juste voir les différents projets.
-
-DÉVELOPPEUR : il peut modifier les projets auxquels il participe. Il peut donc créer, supprimer, modifier, visualiser des issues et des tâches. Il peut aussi gérer les releases, les tests et créer de la documentation.
+Rôles:
+le PROPRIETAIRE d'un projet P est defini comme l'utilisateur étant connecté à un compte sur l'outil et ayant créé le projet P. Il est le seul utilisateur à pouvoir :
+ - supprimer le projet P,
+ - modifier les informations descriptives du projet P,
+ - ajouter un membre au projet P,
+ - attribuer des droits à un membre du projet P,
+ - retirer des droits à un membre du projet P,
+ - modifier les droits d'un membre du projet P.
+le CLIENT est defini comme l'utilisateur étant connecté à un compte sur l'outil, étant membre du projet P sans l'avoir créé et ayant seulement des droits de lecture sur les ISSUES, les TASKS, les TESTS et la DOC. Le client peut télécharger la dernière RELEASE.
+le DEVELOPPEUR est defini comme l'utilisateur étant connecté à un compte sur l'outil, étant membre du projet P sans l'avoir créé et ayant les mêmes droits que le CLIENT, ainsi que les suivants:
+ - ajouter, supprimer et modifier les ISSUES, les TASKS, les RELEASES, les TESTS et la DOC. 
+le VISITEUR est defini comme l'utilisateur qui n'est pas connecté à un compte sur l'outil, ou qui est connecté à un compte sur l'outil sans être membre du projet P. Il peut se créer un compte, se connecter à un compte de l'outil, effectuer une recherche parmi les projets présents sur l'outil et visualiser la page d'accueil d'un projet selectionné. Les User Stories qui concernent le VISITEUR concernent donc également les autres usagers : les droits du VISITEUR sont des droits par défaut, que tous les rôles ont.
 
 (CLIENT : il peut agir sur les priorités des issues.)
 
+************************************************************************************************************************************
+
+VISITEUR
+
 US1 : En tant que VISITEUR
-      je souhaite pouvoir créer un compte. Sur la page d'accueil du logiciel, on aurait accès au bouton S'INSCRIRE. En appuyant dessus, le logiciel ouvrirait une nouvelle fenêtre qui proposerait un formulaire à remplir avec les informations nécessaires à l'authentification (NOM, PRÉNOM, LOGIN, ADRESSE MAIL et MOT DE PASSE). Tous ces champs sont obligatoires. Il y aurait des champs facultatifs comme le nom de la société pour laquelle je travaille
-      afin de pouvoir utiliser le logiciel.
+      je souhaite pouvoir créer un compte. Sur la page d'accueil de l'outil, on aurait accès au bouton S'INSCRIRE. En appuyant dessus, l'outil ouvrirait une nouvelle fenêtre qui proposerait un formulaire à remplir avec les informations nécessaires à l'authentification (NOM, PRÉNOM, LOGIN, ADRESSE MAIL et MOT DE PASSE). Tous ces champs sont obligatoires. Il y aurait des champs facultatifs comme le nom de la société pour laquelle je travaille.
+      Afin de pouvoir utiliser l'outil, je souhaite que cette fonctionnalité soit mise à ma disposition.
+
+US2 : En tant que VISITEUR
+       je souhaite visualiser la liste des différents projets présents sur l'outil. Sur la page d'accueil de l'outil, une barre de recherche serait disponible. En tapant certains mots clés et en appuyant sur la touche "ENTER" de mon clavier, l'outil me proposerait une liste des 10 projets triés par pertinence selon le titre et la description des projets.
+       Afin d'avoir un aperçu des différents projets présents sur l'outil, je souhaite que cette fonctionnalité soit mise à ma disposition.
+
+US3 : En tant que VISITEUR
+        je souhaite visualiser la page d'accueil d'un projet en particulier. En sélectionnant un projet parmi ceux proposés par la page d'accueil de l'outil, je serai reconduit vers une nouvelle page contenant le titre et la description du projet selectionné.
+        Afin d'avoir un résumé d'un projet, je souhaite que cette fonctionnalité soit mise à ma disposition.
+
+US4 : En tant que VISITEUR
+        je souhaite avoir une fenêtre pop-up qui s'affiche lorsque je cherche à accéder aux ISSUES, TASKS, TESTS, RELEASES ou DOC d'un projet auquel je ne suis pas membre. Cette fenêtre pop-up afficherait un message m'informant que je ne peux pas accéder à cette fonctionnalité.
+        Afin de savoir quels sont les privilèges qui me sont accordés sur l'outil, je souhaite que cette fonctionnalité soit mise à ma disposition.
+
+US5: En tant que VISITEUR connecté à un compte,
+        je souhaite que mes projets aient un accès protégé. En tant que VISITEUR non connecté à un compte, l'outil proposerait la rubrique S'AUTHENTIFIER qui mènerait à une nouvelle page. Celle ci comporterait les champs suivants à remplir: LOGIN et MOT DE PASSE. Lorsque ceux ci sont remplis, je peux appuyer sur le bouton VALIDER qui me donne accès à mes projets si les champs remplis sont corrects. Si ce n'est pas le cas, un message apparait et me demande de ressaisir mes identifiants.
+        Afin de réaliser une gestion sécurisée de mes projets, je souhaite que cette fonctionnalité soit réalisée.
+
+************************************************************************************************************************************
+
+PROPRIETAIRE
+
+US5 : En tant que PROPRIETAIRE
+        je souhaite
+        Afin de
 
 US2 : En tant que DÉVELOPPEUR
       je souhaite pouvoir me connecter. En tant que VISITEUR, sur la page d'accueil du logiciel, il y aurait un bouton S'AUTHENTIFIER qui mènerait à une nouvelle page. Celle-ci comporterait les champs suivants à remplir : LOGIN et MOT DE PASSE. Lorsque ceux-ci sont remplis, je peux appuyer sur le bouton VALIDER qui me reconduit vers une nouvelle fenêtre qui me donne accès à mon compte. Si ce n'est pas le cas ou que mon LOGIN ou mon MOT DE PASSE est faux, une fenêtre pop-up apparaît et me demande ressaisir mes identifiants
@@ -70,7 +107,3 @@ US15 : En tant que DÉVELOPPEUR
 US16 : En tant que DÉVELOPPEUR
        je souhaite avoir accès à ma documentation
        afin de pouvoir les modifier.
-
-US17 : En tant que VISITEUR
-       je souhaite avoir accès à la liste des projets
-       afin d'avoir un aperçu des différents projets présents dans cet outil.
