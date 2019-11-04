@@ -20,7 +20,7 @@ Le VISITEUR est defini comme l'utilisateur qui n'est pas connecté à un compte 
 ************************************************************************************************************************************
 
 VISITEUR
-
+:---: | :--- | :---: | :---:
 id | User story | Difficulté | Priorité
 
 US1 | En tant que VISITEUR
