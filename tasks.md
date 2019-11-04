@@ -1,6 +1,6 @@
 Tâche | Description | Durée | Priorité
 :---: | :--- | :---: | :---:
-Créer une base de données | Afin de gérer les projets et leurs différents intervenants, il est nécessaire de créer huit tables : Projet, Utilisateur, Rôle, Issues, Taches, Tests, Releases et Documentation.* Les champs de la table Utilisateur sont :
+Créer une base de données | Afin de gérer les projets et leurs différents intervenants, il est nécessaire de créer huit tables : Projet, Utilisateur, Rôle, Issues, Taches, Tests, Releases et Documentation.<br>* Les champs de la table Utilisateur sont :
     * Nom : le nom de l'utilisateur, de type VARCHAR
     * Prénom : le prénom de l'utilisateur, de type VARCHAR 
     * Adresse Mail : l'addresse mail de l'utilisateur, de type VARCHAR
