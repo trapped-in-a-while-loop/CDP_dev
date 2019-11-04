@@ -1,18 +1,6 @@
 Tâche | Description | Durée | Lien
 :---: | :--- | :---: | :---:
-Créer une base de données | Afin de gérer les projets et leurs différents intervenants, il est nécessaire de créer huit tables : Projet, Utilisateur, Rôle, Issues, Taches, Tests, Releases et Documentation.<br><br>Les champs de la table Utilisateur sont :<ul>
-    <li> Nom : le nom de l'utilisateur, de type VARCHAR
-    <li> Prénom : le prénom de l'utilisateur, de type VARCHAR 
-    <li> Adresse Mail : l'addresse mail de l'utilisateur, de type VARCHAR
-    <li> Nom de la société : le nom de la société dans laquelle l'utilisateur travaille, de type VARCHAR. Ce champs peut-être de valeur NULL.
-    <li> Login : le Login de l'utilisateur, de type VARCHAR. Cette clé est UNIQUE.
-    <li> Mot de passe: le Mot de pas de l'utilisateur, de type VARCHAR </ul><br><br> Les champs de la table Projet sont :<ul>
-    <li> Titre : le titre du projet, de type VARCHAR
-    <li> Description : la description exhaustive du projet, de type VARCHAR
-    <li> Propriétaire : le Login du propriétaire du projet, de type VARCHAR Le champs "Propriétaire" est clé primaire de la table Utilisateur et fait réference au champs "Login" de la table Utilisateur.</ul><br><br> Les champs de la table Rôle sont :<ul>
-    <li> ID Projet : le Titre du projet concerné, de type VARCHAR
-    <li> ID Compte : le Login de l'utilisateur concerné, de type VARCHAR  
-    <li> Rôle : le rôle attribué à l'utilisateur sur ce projet, de type VARCHAR. Les champs "ID Projet" et "ID Compte" sont respectivement clés primaires des tables Projet et Utilisateur et font références aux champs "Titre" de la table Projet et "Login" de la table Utilisateur.</ul> | 2 | US1
+Créer une base de données | Afin de gérer les projets et leurs différents intervenants, il est nécessaire de créer huit tables : Projet, Utilisateur, Rôle, Issues, Taches, Tests, Releases et Documentation.<br><br>Les champs de la table Utilisateur sont :<ul><li> Nom : le nom de l'utilisateur, de type VARCHAR<li> Prénom : le prénom de l'utilisateur, de type VARCHAR <li> Adresse Mail : l'addresse mail de l'utilisateur, de type VARCHAR<li> Nom de la société : le nom de la société dans laquelle l'utilisateur travaille, de type VARCHAR. Ce champs peut-être de valeur NULL.<li> Login : le Login de l'utilisateur, de type VARCHAR. Cette clé est UNIQUE.<li> Mot de passe: le Mot de pas de l'utilisateur, de type VARCHAR </ul><br><br> Les champs de la table Projet sont :<ul><li> Titre : le titre du projet, de type VARCHAR<li> Description : la description exhaustive du projet, de type VARCHAR<li> Propriétaire : le Login du propriétaire du projet, de type VARCHAR Le champs "Propriétaire" est clé primaire de la table Utilisateur et fait réference au champs "Login" de la table Utilisateur.</ul><br><br> Les champs de la table Rôle sont :<ul><li> ID Projet : le Titre du projet concerné, de type VARCHAR<li> ID Compte : le Login de l'utilisateur concerné, de type VARCHAR  <li> Rôle : le rôle attribué à l'utilisateur sur ce projet, de type VARCHAR. Les champs "ID Projet" et "ID Compte" sont respectivement clés primaires des tables Projet et Utilisateur et font références aux champs "Titre" de la table Projet et "Login" de la table Utilisateur.</ul> | 2 | US1
 
 Les champs de la table Issues sont :
 - ID Projet : le Titre du projet concerné, de type VARCHAR
