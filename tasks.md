@@ -1,41 +1,6 @@
 Tâche | Description | Durée | Lien
 :---: | :--- | :---: | :---:
-Créer une base de données | Afin de gérer les projets et leurs différents intervenants, il est nécessaire de créer huit tables : Projet, Utilisateur, Rôle, Issues, Taches, Tests, Releases et Documentation.<br><br>Les champs de la table Utilisateur sont :<ul><li> Nom : le nom de l'utilisateur, de type VARCHAR<li> Prénom : le prénom de l'utilisateur, de type VARCHAR <li> Adresse Mail : l'addresse mail de l'utilisateur, de type VARCHAR<li> Nom de la société : le nom de la société dans laquelle l'utilisateur travaille, de type VARCHAR. Ce champs peut-être de valeur NULL.<li> Login : le Login de l'utilisateur, de type VARCHAR. Cette clé est UNIQUE.<li> Mot de passe: le Mot de pas de l'utilisateur, de type VARCHAR </ul><br><br> Les champs de la table Projet sont :<ul><li> Titre : le titre du projet, de type VARCHAR<li> Description : la description exhaustive du projet, de type VARCHAR<li> Propriétaire : le Login du propriétaire du projet, de type VARCHAR Le champs "Propriétaire" est clé primaire de la table Utilisateur et fait réference au champs "Login" de la table Utilisateur.</ul><br><br> Les champs de la table Rôle sont :<ul><li> ID Projet : le Titre du projet concerné, de type VARCHAR<li> ID Compte : le Login de l'utilisateur concerné, de type VARCHAR  <li> Rôle : le rôle attribué à l'utilisateur sur ce projet, de type VARCHAR. Les champs "ID Projet" et "ID Compte" sont respectivement clés primaires des tables Projet et Utilisateur et font références aux champs "Titre" de la table Projet et "Login" de la table Utilisateur.</ul> | 2 | US1
-
-Les champs de la table Issues sont :
-- ID Projet : le Titre du projet concerné, de type VARCHAR
-- Role : la partie "En tant que" de la description de l'issue, de type VARCHAR
-- Action : la partie "Je souhaite" de la description de l'issue, de type VARCHAR
-- Raison : la partie "Afin que" de la description de l'issue, de type VARCHAR
-Le champs "ID Projet" est la clé primaire de la table Projet et fait référence au champ "Titre" de la table Projet.
-
-Les champs de la table Taches sont :
-- ID Projet : le Titre du projet concerné, de type VARCHAR
-- Titre : le titre de la tache, de type VARCHAR
-- Description : la description exhaustive de la tache, de type VARCHAR
-- Statut : le statut de la tache, de type ENUM(TO DO, PENDING, DONE)
-Le champs "ID Projet" est la clé primaire de la table Projet et fait référence au champ "Titre" de la table Projet.
-
-Les champs de la table Documentation sont :
-- ID Projet : le Titre du projet concerné, de type VARCHAR
-- Description : la description exhaustive de l'issue, de type VARCHAR
-Le champs "ID Projet" est la clé primaire de la table Projet et fait référence au champ "Titre" de la table Projet.
-
-Les champs de la table Tests :
-- ID Projet : le Titre du projet concerné, de type VARCHAR
-- Given : la partie GIVEN du test, de type VARCHAR
-- When : la partie WHEN du test, de type VARCHAR
-- Then : la partie THEN du test, de type VARCHAR
-Le champs "ID Projet" est la clé primaire de la table Projet et fait référence au champ "Titre" de la table Projet.
-
-Les champs de la table Releases sont :
-- ID Projet : le Titre du projet concerné, de type VARCHAR
-- Nom : le nom de la release, de type VARCHAR
-- Date : la date de la release, de type DATETIME
-- URL : un lien permettant de télécharger l'exécutable/l'archive de la release, de type VARCHAR
-Le champs "ID Projet" est la clé primaire de la table Projet et fait référence au champ "Titre" de la table Projet.
-
-Durée : 1/2 jour
+Créer une base de données | Afin de gérer les projets et leurs différents intervenants, il est nécessaire de créer huit tables : Projet, Utilisateur, Rôle, Issues, Taches, Tests, Releases et Documentation.<br><br>Les champs de la table Utilisateur sont :<ul><li> Nom : le nom de l'utilisateur, de type VARCHAR<li> Prénom : le prénom de l'utilisateur, de type VARCHAR <li> Adresse Mail : l'addresse mail de l'utilisateur, de type VARCHAR<li> Nom de la société : le nom de la société dans laquelle l'utilisateur travaille, de type VARCHAR. Ce champs peut-être de valeur NULL.<li> Login : le Login de l'utilisateur, de type VARCHAR. Cette clé est UNIQUE.<li> Mot de passe: le Mot de pas de l'utilisateur, de type VARCHAR </ul><br> Les champs de la table Projet sont :<ul><li> Titre : le titre du projet, de type VARCHAR<li> Description : la description exhaustive du projet, de type VARCHAR<li> Propriétaire : le Login du propriétaire du projet, de type VARCHAR<br> Le champs "Propriétaire" est clé primaire de la table Utilisateur et fait réference au champs "Login" de la table Utilisateur.</ul><br> Les champs de la table Rôle sont :<ul><li> ID Projet : le Titre du projet concerné, de type VARCHAR<li> ID Compte : le Login de l'utilisateur concerné, de type VARCHAR  <li> Rôle : le rôle attribué à l'utilisateur sur ce projet, de type VARCHAR.<br> Les champs "ID Projet" et "ID Compte" sont respectivement clés primaires des tables Projet et Utilisateur et font références aux champs "Titre" de la table Projet et "Login" de la table Utilisateur.</ul><br>Les champs de la table Issues sont : <ul><li> ID Projet : le Titre du projet concerné, de type VARCHAR<li> Role : la partie "En tant que" de la description de l'issue, de type VARCHAR<li> Action : la partie "Je souhaite" de la description de l'issue, de type VARCHAR<li> Raison : la partie "Afin que" de la description de l'issue, de type VARCHAR<br>Le champs "ID Projet" est la clé primaire de la table Projet et fait référence au champ "Titre" de la table Projet.</ul><br>Les champs de la table Taches sont :<ul><li> ID Projet : le Titre du projet concerné, de type VARCHAR<li> Titre : le titre de la tache, de type VARCHAR<li> Description : la description exhaustive de la tache, de type VARCHAR<li> Statut : le statut de la tache, de type ENUM(TO DO, PENDING, DONE)<br>Le champs "ID Projet" est la clé primaire de la table Projet et fait référence au champ "Titre" de la table Projet.</ul><br>Les champs de la table Documentation sont :<ul><li> ID Projet : le Titre du projet concerné, de type VARCHAR<li> Description : la description exhaustive de l'issue, de type VARCHARL<br>Le champs "ID Projet" est la clé primaire de la table Projet et fait référence au champ "Titre" de la table Projet.</ul><br>Les champs de la table Tests :<ul><li> ID Projet : le Titre du projet concerné, de type VARCHAR<li> Given : la partie GIVEN du test, de type VARCHAR<li> When : la partie WHEN du test, de type VARCHAR<li> Then : la partie THEN du test, de type VARCHAR<br>Le champs "ID Projet" est la clé primaire de la table Projet et fait référence au champ "Titre" de la table Projet.</ul><br>Les champs de la table Releases sont :<ul><li> ID Projet : le Titre du projet concerné, de type VARCHAR<li> Nom : le nom de la release, de type VARCHAR<li> Date : la date de la release, de type DATETIME<li> URL : un lien permettant de télécharger l'exécutable/l'archive de la release, de type VARCHAR<br>Le champs "ID Projet" est la clé primaire de la table Projet et fait référence au champ "Titre" de la table Projet.</ul> | 1/2 jour | ?
 
 #################### Ajouter une barre de recherche sur la page d'accueil ####################
 
