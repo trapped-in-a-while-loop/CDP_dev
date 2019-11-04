@@ -20,9 +20,9 @@ Le VISITEUR est defini comme l'utilisateur qui n'est pas connecté à un compte 
 ************************************************************************************************************************************
 
 VISITEUR
-:---: | :--- | :---: | :---:
-id | User story | Difficulté | Priorité
 
+id | User story | Difficulté | Priorité
+:---: | :--- | :---: | :---:
 US1 | En tant que VISITEUR
       je souhaite pouvoir créer un compte. Sur la page d'accueil de l'outil, on aurait accès au bouton S'INSCRIRE. En appuyant dessus, l'outil ouvrirait une nouvelle fenêtre qui proposerait un formulaire à remplir avec les informations nécessaires à l'authentification (NOM, PRÉNOM, LOGIN, ADRESSE MAIL et MOT DE PASSE). Tous ces champs sont obligatoires. Il y aurait des champs facultatifs comme le nom de la société pour laquelle je travaille.
       Afin de pouvoir utiliser l'outil, je souhaite que cette fonctionnalité soit mise à ma disposition. | 2 | BASSE
