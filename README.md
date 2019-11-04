@@ -21,17 +21,15 @@ Le VISITEUR est defini comme l'utilisateur qui n'est pas connecté à un compte 
 
 VISITEUR
 
-US1 : En tant que VISITEUR
-      je souhaite pouvoir créer un compte. Sur la page d'accueil de l'outil, on aurait accès au bouton S'INSCRIRE. En appuyant dessus, l'outil ouvrirait une nouvelle fenêtre qui proposerait un formulaire à remplir avec les informations nécessaires à l'authentification (NOM, PRÉNOM, LOGIN, ADRESSE MAIL et MOT DE PASSE). Tous ces champs sont obligatoires. Il y aurait des champs facultatifs comme le nom de la société pour laquelle je travaille.
-      Afin de pouvoir utiliser l'outil, je souhaite que cette fonctionnalité soit mise à ma disposition.
-Difficulté : 2
-Priorité : BASSE
+id | User story | Difficulté | Priorité
 
-US2 : En tant que VISITEUR
+US1 | En tant que VISITEUR
+      je souhaite pouvoir créer un compte. Sur la page d'accueil de l'outil, on aurait accès au bouton S'INSCRIRE. En appuyant dessus, l'outil ouvrirait une nouvelle fenêtre qui proposerait un formulaire à remplir avec les informations nécessaires à l'authentification (NOM, PRÉNOM, LOGIN, ADRESSE MAIL et MOT DE PASSE). Tous ces champs sont obligatoires. Il y aurait des champs facultatifs comme le nom de la société pour laquelle je travaille.
+      Afin de pouvoir utiliser l'outil, je souhaite que cette fonctionnalité soit mise à ma disposition. | 2 | BASSE
+
+US2 | En tant que VISITEUR
        je souhaite visualiser la liste des différents projets présents sur l'outil. Sur la page d'accueil de l'outil, une barre de recherche serait disponible. En tapant certains mots clés et en appuyant sur la touche "ENTER" de mon clavier, l'outil me proposerait une liste des 10 projets triés par pertinence selon le titre et la description des projets.
-       Afin d'avoir un aperçu des différents projets présents sur l'outil, je souhaite que cette fonctionnalité soit mise à ma disposition.
-Difficulté : 1
-Priorité : BASSE
+       Afin d'avoir un aperçu des différents projets présents sur l'outil, je souhaite que cette fonctionnalité soit mise à ma disposition | 1 | BASSE
 
 US3 : En tant que VISITEUR
         je souhaite visualiser la page d'accueil d'un projet en particulier. En sélectionnant un projet parmi ceux proposés par la page d'accueil de l'outil, je serai reconduit vers une nouvelle page contenant le titre et la description du projet selectionné.
