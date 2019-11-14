@@ -30,8 +30,8 @@ app.get("/", function (req, res) {
     res.render("index");
 });
 
-app.get("/indexcon", function (req, res) {
-    res.render("indexcon");
+app.get("/connected", function (req, res) {
+    res.render("connected");
 });
 
 app.get("/inscription", function (req, res) {
@@ -74,7 +74,7 @@ app.post("/connexion", function (req, res) {
             console.log("Login ou mot de passe faux");
         }
     });
-    res.render("indexcon");
+    res.render("connected");
 });
 
 app.listen(3000, function () {
