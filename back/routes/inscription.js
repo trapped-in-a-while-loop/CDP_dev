@@ -1,24 +1,28 @@
-let express = require('express');
-let router = express.Router();
+let mongoose = require('mongoose');
 
-/* GET users listing. */
-router.get("/", function (req, res) {
-    console.log("inscription get");
-    res.json({result: "BRAVO"});
+let UtilisateurSchema = new mongoose.Schema({
+    Nom : {type: String, required: true},
+    Prenom : {type: String, required: true},
+    Mail : {type: String, required: true},
+    Societe : {type: String, required: false},
+    _id : {type: String, unique: true, required: true},
+    MdP : {type: String, required: true}
 });
 
-router.post("/", function (req, res) {
-    console.log("inscription post");
-    const nom = req.body.nom;
-    const prenom = req.body.prenom;
-    const mail = req.body.mail;
-    const login = req.body.login;
-    const password = req.body.password;
-    const societe = req.body.societe;
-    let user = new UtilisateurModel({Nom : nom, Prenom : prenom, Mail : mail, Societe : societe, _id : login, MdP : password});
+let UtilisateurModel = new mongoose.model('Utilisateur', UtilisateurSchema, 'Utilisateur');
+
+function newUser() {
+    const nom = document.getElementById('nom').value;
+    const prenom = document.getElementById('prenom').value;
+    const mail = document.getElementById('mail').value;
+    const societe = document.getElementById('societe').value;
+    const login = document.getElementById('login').value;
+    const password = document.getElementById('password').value;
+    let user = new UtilisateurModel({ Nom: nom, Prenom: prenom, Mail: mail, Societe: societe, _id: login, MdP: password });
     user.save(function (err) {
         if (err) console.log(err);
     });
-});
+}
 
-module.exports = router;
+const button = document.querySelector('button');
+button.addEventListener('click', newUser);
