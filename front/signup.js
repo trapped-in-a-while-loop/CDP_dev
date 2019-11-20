@@ -2,7 +2,7 @@ document.querySelector('#signup').addEventListener('click', onClick);
 
 function onClick()
 {
-    const url = "wwww.localhost:5000/user:create";
+    //const url = "/back/user/create";
 
     const my_headers = new Headers();
 

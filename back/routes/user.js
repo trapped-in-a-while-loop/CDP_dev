@@ -11,7 +11,7 @@ let UtilisateurSchema = new mongoose.Schema({
 
 let UtilisateurModel = new mongoose.model('Utilisateur', UtilisateurSchema, 'Utilisateur');
 
-app.post("/user:create", function(req, res)
+//app.post("/create", function(req, res)
 {
     const nom = req.body.nom;
     const prenom = req.body.prenom;
@@ -23,4 +23,5 @@ app.post("/user:create", function(req, res)
     user.save(function (err) {
         if (err) console.log(err);
     });
+    return res.status(201)
 })
