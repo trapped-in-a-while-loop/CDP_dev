@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="fen">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <title>Gestion de projets</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="myaccount.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -21,7 +20,9 @@
 </head>
 
 <body class="container">
+
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
         <div class="container">
             <a class="btn btn-dark" href="connected.html">
                 <i class="fa fa-home"></i> Accueil
@@ -33,6 +34,8 @@
                         data-toggle="dropdown">Mon compte
                         <span class="caret"></span></button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="myaccount.html">Mon profil</a>
+                        </li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="myprojects.html">Mes projets</a>
                         </li>
                     </ul>
@@ -49,36 +52,22 @@
 
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Mon profil</h1>
+            <h1 class="jumbotron-heading">Projet 1</h1>
         </div>
     </section>
 
-    <div class="form-group form-inline">
-        <label for="nom">Nom :&nbsp</label>
-            <input type="text" name="nom" class="form-control" id="nom" placeholder="Nom de famille">
-    </div>
-    <div class="form-group form-inline">
-        <label for="prenom">Prénom :&nbsp</label>
-            <input type="text" name="prenom" class="form-control" id="prenom" placeholder="Prénom">
-    </div>
-    <div class="form-group form-inline">
-        <label for="mail">Adresse mail :&nbsp</label>
-            <input type="email" name="mail" class="form-control" id="mail" placeholder="Adresse mail">
-    </div>
-    <div class="form-group form-inline">
-        <label for="login">Login :&nbsp</label>
-            <input type="text" name="login" class="form-control" id="login" placeholder="Login">
-    </div>
-    <div class="form-group form-inline">
-        <label for="password">Mot de passe :&nbsp</label>
-            <input type="password" name="password" class="form-control" id="password" placeholder="Mot de passe">
-    </div>
-    <div class="form-group form-inline">
-        <label for="societe">Nom de la Société :&nbsp</label>
-            <input type="text" name="societe" class="form-control" id="societe" placeholder="Nom de la société">
-    </div>
-    <p style="text-align: center;"><button type="submit" id="signup" class="btn btn-primary">Sauvegarder</button>
-        <a type="button" class="btn btn-secondary" href="home.html">Annuler</a></p>
-</body>
+    <div class="row">
+        <div class="col-sm-4">
+            <nav class="nav flex-column">
+                <a class="nav-link" href="issue.html">Issues</a>
+                <a class="nav-link" href="task.html">Tâches</a>
+                <a class="nav-link" href="test.html">Tests</a>
+                <a class="nav-link" href="release.html">Releases</a>
+                <a class="nav-link" href="documentation.html">Documentation</a>
+            </nav>
+        </div>
 
-</html>
+        <div class="col-sm-8">
+            <a class="btn btn-success btn-sm ml-3" href="createtest.html">Créer un test</a>
+        </div>
+    </div>
