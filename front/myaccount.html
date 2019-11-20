@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fen">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion de projets</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="signup.js" defer></script>
+</head>
+
+<body class="container">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="btn btn-dark" href="connected.html">
+                <i class="fa fa-home"></i> Accueil
+            </a>
+
+            <div class="container">
+                <div class="dropdown">
+                    <button class="btn btn-success btn-sm ml-3 dropdown-toggle" id="menu1" type="button"
+                        data-toggle="dropdown">Mon compte
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="myproject.html">Mes projets</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                <form class="form-inline my-2 my-lg-0">
+                    <a class="btn btn-success btn-sm ml-3" href="home.html">Déconnexion</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Mon profil</h1>
+        </div>
+    </section>
+
+    <div class="form-group">
+        <label for="nom">Nom</label>
+            <input type="text" name="nom" class="form-control" id="nom" placeholder="Nom de famille">
+    </div>
+    <div class="form-group">
+        <label for="prenom">Prénom</label>
+            <input type="text" name="prenom" class="form-control" id="prenom" placeholder="Prénom">
+    </div>
+    <div class="form-group">
+        <label for="mail">Adresse mail</label>
+            <input type="email" name="mail" class="form-control" id="mail" placeholder="Adresse mail">
+    </div>
+    <div class="form-group">
+        <label for="login">Login</label>
+            <input type="text" name="login" class="form-control" id="login" placeholder="Login">
+    </div>
+    <div class="form-group">
+        <label for="password">Mot de passe</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Mot de passe">
+    </div>
+    <div class="form-group">
+        <label for="societe">Nom de la Société</label>
+            <input type="text" name="societe" class="form-control" id="societe" placeholder="Nom de la société">
+    </div>
+    <p style="text-align: center;"><button type="submit" id="signup" class="btn btn-primary">Inscription</button>
+        <a type="button" class="btn btn-secondary" href="home.html">Annuler</a></p>
+</body>
+
+</html>
