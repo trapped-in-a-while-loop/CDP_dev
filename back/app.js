@@ -1,18 +1,28 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser')
-
-//var index = require('./routes/index');
-var inscription = require('./routes/inscription');
-
-var app = express();
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
+const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser())
 
-//app.use('/', index);
-app.use('/inscription', inscription);
+mongoose.connect("mongodb+srv://ptomas:gtWefenhKP67PPCQ@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority",
+    { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log("MongoDB connected");
+            app.get('/routes');
+            app.listen(5000, function() {
+                console.log("listening to port 5000");
+            });
+        }
+    }
+);
 
 module.exports = app;
