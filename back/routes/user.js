@@ -15,19 +15,18 @@ var userModel = mongoose.model('user', userSchema, 'user');
 route.get("/", function(req, res){
     mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err) {
-            res.statutMessage = "Connexion BDD impossible";
+            res.statusMessage = "Connexion BDD impossible";
             return res.status(500).end();
         }else{
-            userModel.findOne({Login:req.query.login, Password:req.query.password}, function(err, doc){
+            userModel.findOne({Login:req.query.login, Password:req.query.mdp}, function(err, doc){
                 if(err) {
                     res.statusMessage = "Echec vérification identifiants";
                     return res.status(500).end();
                 }else{
                     if(doc) {
-                        res.statusMessage = "OK";
-                        return res.status(200).end();
+                        return res.status(200).json(doc.toJSON());
                     }else{
-                        res.statutMessage = "Utilisateur ou mot de passe incorrect";
+                        res.statusMessage = "Utilisateur ou mot de passe incorrect";
                         return res.status(401).end();
                     }
                 }
@@ -38,9 +37,10 @@ route.get("/", function(req, res){
 
 route.post("/", function (req, res) {
     mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
-        if(err)
-            return res.status(500).json({message: "Connexion BDD impossible"});
-        else{
+        if(err) {
+            res.statusMessage = "Connexion BDD impossible";
+            return res.status(500).end();
+        }else{
             userModel.findOne({Login:req.body.login}, function(err, doc){
                 if(err) {
                     res.statusMessage = "Echec vérification login";

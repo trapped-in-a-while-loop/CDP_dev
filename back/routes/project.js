@@ -15,15 +15,12 @@ route.get("/", function(req, res){
             res.statutMessage = "Connexion BDD impossible";
             return res.status(500).end();
         }else{
-            projectModel.find({Login:req.query.login}, function(err, docs){
+            projectModel.find().lean().exec(function (err, docs) {
                 if(err) {
                     res.statusMessage = "Echec récupération projets";
                     return res.status(500).end();
-                }else{
-                    projectModel.find().lean().exec(function (err, docs) {
-                        return res.end(JSON.stringify(docs));
-                    });
-                }
+                }else
+                    return res.end(JSON.stringify(docs));
             });
         }
     });
