@@ -15,7 +15,7 @@ route.get("/", function(req, res){
             res.statutMessage = "Connexion BDD impossible";
             return res.status(500).end();
         }else{
-            projectModel.find().lean().exec(function (err, docs) {
+            projectModel.find({Login:req.query.login}).lean().exec(function (err, docs) {
                 if(err) {
                     res.statusMessage = "Echec récupération projets";
                     return res.status(500).end();
@@ -44,6 +44,27 @@ route.post("/", function (req, res) {
                     mongoose.connection.close();
                     res.statusMessage = "Création du projet réussie";
                     return res.status(201).end();
+                }
+            });
+        }
+    });
+});
+
+route.delete("/", function (req, res) {
+    mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+        if(err)
+            return res.status(500).json({message: "Connexion BDD impossible"});
+        else{
+            var id = req.body.id;
+            projectModel.findByIdAndRemove(id, function(err){
+                if(err){
+                    res.statusMessage = "Echec de la suppression du projet";
+                    mongoose.connection.close();
+                    return res.status(500).end();
+                }else{
+                    mongoose.connection.close();
+                    res.statusMessage = "Suppression du projet réussie";
+                    return res.status(200).end();
                 }
             });
         }

@@ -18,14 +18,52 @@ fetch(url+"?login="+login)
     {
         if(res.status === 200) {
             res.json().then(function(data){
-                result = "";
+                var result = "";
+                var cpt = 0;
                 data.forEach(item => {
                     result += item["Titre"]+"\n" +
-                        "        <a type=\"button\" class=\"btn btn-danger\" href=\"deleteproject.html\">Supprimer</a>\n" +
-                        "        <a type=\"button\" class=\"btn btn-primary\" href=\"editproject.html\">Editer</a>\n" +
-                        "        <a type=\"button\" class=\"btn btn-info\" href=\"manageproject.html\">Gérer</a></br>";
+                        "        <a type=\"button\" id=\"delete" + cpt + "\" class=\"btn btn-danger\">Supprimer</a>\n" +
+                        "        <a type=\"button\" id=\"edit" + cpt + "\" class=\"btn btn-primary\">Editer</a>\n" +
+                        "        <a type=\"button\" id=\"manage" + cpt + "\" class=\"btn btn-info\">Gérer</a></br>";
+                    cpt += 1;
                 });
+                cpt -= 1;
+                var globCpt = cpt;
                 document.querySelector("#projects").innerHTML = result;
+                while(cpt>=0){
+                    document.querySelector("#delete"+cpt).addEventListener('click', function(){
+
+                        const my_headers = new Headers();
+                        my_headers.append("Content-Type", "application/json");
+
+                        const id = data[globCpt]["_id"];
+                        globCpt -= 1;
+
+                        var params = {id:id};
+
+                        var my_init = {
+                            method: 'DELETE',
+                            headers: my_headers,
+                            mode: 'cors',
+                            cache: 'default',
+                            body: JSON.stringify(params)
+                        };
+
+                        fetch(url, my_init)
+                            .then(function(res)
+                            {
+                                if(res.status === 200) {
+                                    alert("Projet supprimé");
+                                    document.location.reload();
+                                }
+                                else
+                                    alert(res.statusText);
+                            }).catch(function(err){
+                                console.log(err.message);
+                        });
+                    });
+                    cpt -= 1;
+                }
             });
         }else
             alert(res.statusText);

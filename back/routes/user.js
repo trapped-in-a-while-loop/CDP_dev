@@ -18,7 +18,7 @@ route.get("/", function(req, res){
             res.statusMessage = "Connexion BDD impossible";
             return res.status(500).end();
         }else{
-            userModel.findOne({Login:req.query.login, Password:req.query.mdp}, function(err, doc){
+            userModel.findOne({Login:req.query.login, Password:req.query.password}, function(err, doc){
                 if(err) {
                     res.statusMessage = "Echec vérification identifiants";
                     mongoose.connection.close();
