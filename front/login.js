@@ -16,8 +16,8 @@ function onClick()
         .then(function(res)
         {
             if(res.status === 200){
-                document.cookie = "login="+login;
-                document.cookie = "mdp="+mdp;
+                document.cookie = "login="+login+"; path=./*";
+                document.cookie = "mdp="+mdp+"; path=./*";
                 alert("CONNECTE");
                 document.location.href = "index.html";
             }
