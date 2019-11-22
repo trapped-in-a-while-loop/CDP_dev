@@ -9,30 +9,25 @@ var projectSchema = new mongoose.Schema({
 });
 var projectModel = mongoose.model('project', projectSchema, 'project');
 
-/*
 route.get("/", function(req, res){
     mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
-        if(err)
-            return res.status(500).json({message: "Connexion BDD impossible"});
-        else{
-            userModel.findOne({Login:req.query.login, Password:req.query.password}, function(err, doc){
+        if(err) {
+            res.statutMessage = "Connexion BDD impossible";
+            return res.status(500).end();
+        }else{
+            projectModel.find({Login:req.query.login}, function(err, docs){
                 if(err) {
-                    res.statusMessage = "Echec vérification identifiants";
+                    res.statusMessage = "Echec récupération projets";
                     return res.status(500).end();
                 }else{
-                    if(doc) {
-                        res.statusMessage = "OK";
-                        return res.status(200).end();
-                    }else{
-                        res.statutMessage = "Utilisateur ou mot de passe incorrect";
-                        return res.status(401).end();
-                    }
+                    projectModel.find().lean().exec(function (err, docs) {
+                        return res.end(JSON.stringify(docs));
+                    });
                 }
             });
         }
     });
 });
-*/
 
 route.post("/", function (req, res) {
     mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){

@@ -14,9 +14,10 @@ var userModel = mongoose.model('user', userSchema, 'user');
 
 route.get("/", function(req, res){
     mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
-        if(err)
-            return res.status(500).json({message: "Connexion BDD impossible"});
-        else{
+        if(err) {
+            res.statutMessage = "Connexion BDD impossible";
+            return res.status(500).end();
+        }else{
             userModel.findOne({Login:req.query.login, Password:req.query.password}, function(err, doc){
                 if(err) {
                     res.statusMessage = "Echec vérification identifiants";
