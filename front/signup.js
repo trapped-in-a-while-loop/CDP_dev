@@ -2,29 +2,40 @@ document.querySelector('#signup').addEventListener('click', onClick);
 
 function onClick()
 {
-    //const url = "/back/user/create";
+    const url = 'http://localhost:3000/user';
 
     const my_headers = new Headers();
+    my_headers.append("Content-Type", "application/json");
 
     const nom = document.getElementById('nom').value;
     const prenom = document.getElementById('prenom').value;
     const mail = document.getElementById('mail').value;
     const login = document.getElementById('login').value;
-    const password = document.getElementById('password').value;
+    const mdp = document.getElementById('password').value;
     const societe = document.getElementById('societe').value;
+	
+	var params = {nom:nom, prenom:prenom, mail:mail, login:login, mdp:mdp, societe:societe};
 
-    const my_init = {
+    var my_init = {
         method: 'POST',
         headers: my_headers,
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({'nom':nom, 'prenom':prenom, 'mail':mail, 'login':login, 'password':password, 'societe':societe})
-    }
+        body: JSON.stringify(params)
+    };
 
     fetch(url, my_init)
     .then(function(res)
     {
-        alert("Signup done");
-        document.location.href = "front/home.html";
-    })
+        if(res.status === 409)
+            alert("Ce login est déjà utilisé, veuillez en choisir un autre");
+        else if(res.status === 201) {
+            alert("Inscription réussie !");
+            document.location.href = "home.html";
+        }
+        else
+            alert(res.statusText);
+    }).catch(function(err){
+		console.log(err.message);
+	});
 }
