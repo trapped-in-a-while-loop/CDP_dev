@@ -31,7 +31,7 @@ function onClick()
             alert("Ce login est déjà utilisé, veuillez en choisir un autre");
         else if(res.status === 201) {
             alert("Inscription réussie !");
-            document.location.href = "home.html";
+            document.location.href = "index.html";
         }
         else
             alert(res.statusText);

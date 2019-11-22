@@ -19,7 +19,7 @@ function onClick()
                 document.cookie = "login="+login;
                 document.cookie = "mdp="+mdp;
                 alert("CONNECTE");
-                document.location.href = "home.html";
+                document.location.href = "index.html";
             }
             else
                 alert(res.statusText);
