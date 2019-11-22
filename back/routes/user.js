@@ -12,12 +12,35 @@ var userSchema = new mongoose.Schema({
 });
 var userModel = mongoose.model('user', userSchema, 'user');
 
-route.post("/", function (req, res) {
-    mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true}, function(err){
+route.get("/", function(req, res){
+    mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err)
             return res.status(500).json({message: "Connexion BDD impossible"});
         else{
-            models.userModel.findOne({Login:req.body.login}, function(err, doc){
+            userModel.findOne({Login:req.query.login, Password:req.query.password}, function(err, doc){
+                if(err) {
+                    res.statusMessage = "Echec vérification identifiants";
+                    return res.status(500).end();
+                }else{
+                    if(doc) {
+                        res.statusMessage = "OK";
+                        return res.status(200).end();
+                    }else{
+                        res.statutMessage = "Utilisateur ou mot de passe incorrect";
+                        return res.status(401).end();
+                    }
+                }
+            });
+        }
+    });
+});
+
+route.post("/", function (req, res) {
+    mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+        if(err)
+            return res.status(500).json({message: "Connexion BDD impossible"});
+        else{
+            userModel.findOne({Login:req.body.login}, function(err, doc){
                 if(err) {
                     res.statusMessage = "Echec vérification login";
                     return res.status(500).end();
@@ -32,7 +55,7 @@ route.post("/", function (req, res) {
                         const societe = req.body.societe;
                         const login = req.body.login;
                         const mdp = req.body.mdp;
-                        var user = new models.userModel(
+                        var user = new userModel(
                             {Nom : nom,
                                 Prenom : prenom,
                                 Mail : mail,
