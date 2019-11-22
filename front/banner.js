@@ -19,7 +19,7 @@ if(document.cookie.includes("login=")){
         "\n" +
         "            <div class=\"collapse navbar-collapse justify-content-end\" id=\"navbarsExampleDefault\">\n" +
         "                <form class=\"form-inline my-2 my-lg-0\">\n" +
-        "                    <a class=\"btn btn-success btn-sm ml-3\" href=\"index.html\">Déconnexion</a>\n" +
+        "                    <a id=\"deconnect\" class=\"btn btn-success btn-sm ml-3\" href=\"index.html\">Déconnexion</a>\n" +
         "                </form>\n" +
         "            </div>\n" +
         "        </div>\n" +
@@ -55,3 +55,11 @@ if(document.cookie.includes("login=")){
         "            </div>\n" +
         "        </div>\n" +
         "    </nav>");
+
+document.querySelector("#deconnect").addEventListener("click", onClick);
+
+function onClick(){
+    document.cookie = 'login=deco; expires=Fri, 01 Jan 2010 00:0:00 UTC; path=./*';
+    document.cookie = 'mdp=deco; expires=Fri, 01 Jan 2010 00:0:00 UTC; path=./*';
+    document.location.reload();
+}
