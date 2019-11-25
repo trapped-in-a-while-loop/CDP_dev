@@ -13,16 +13,16 @@ const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.
 const errorConnect = "Connexion BDD impossible";
 
 route.get("/", function(req, res){
-    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
-        if(err) {
+    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err) {
+        if (err) {
             res.statutMessage = errorConnect;
             return res.status(500).end();
-        }else{
-            projectModel.find({Login:req.query.login}).lean().exec(function (err, docs) {
-                if(err) {
+        } else {
+            projectModel.find({Login: req.query.login}).lean().exec(function (err, docs) {
+                if (err) {
                     res.statusMessage = "Echec récupération projets";
                     return res.status(500).end();
-                }else
+                } else
                     return res.end(JSON.stringify(docs));
             });
         }
@@ -30,7 +30,7 @@ route.get("/", function(req, res){
 });
 
 route.post("/", function (req, res) {
-    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err){
         if(err)
             return res.status(500).json({message: errorConnect});
         else{
@@ -54,7 +54,7 @@ route.post("/", function (req, res) {
 });
 
 route.delete("/", function (req, res) {
-    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err){
         if(err)
             return res.status(500).json({message: errorConnect});
         else{
