@@ -33,34 +33,10 @@ fetch(url+"?login="+login)
                 while(cpt>=0){
                     document.querySelector("#delete"+cpt).addEventListener('click', function(){
 
-                        const my_headers = new Headers();
-                        my_headers.append("Content-Type", "application/json");
-
                         const id = data[globCpt]["_id"];
+                        document.cookie = "id="+id+"; path=./*";
+                        document.location.href = "deleteproject.html"
                         globCpt -= 1;
-
-                        var params = {id:id};
-
-                        var my_init = {
-                            method: 'DELETE',
-                            headers: my_headers,
-                            mode: 'cors',
-                            cache: 'default',
-                            body: JSON.stringify(params)
-                        };
-
-                        fetch(url, my_init)
-                            .then(function(res)
-                            {
-                                if(res.status === 200) {
-                                    alert("Projet supprimé");
-                                    document.location.reload();
-                                }
-                                else
-                                    alert(res.statusText);
-                            }).catch(function(err){
-                                console.log(err.message);
-                        });
                     });
                     cpt -= 1;
                 }
