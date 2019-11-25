@@ -9,8 +9,10 @@ var projectSchema = new mongoose.Schema({
 });
 var projectModel = mongoose.model('project', projectSchema, 'project');
 
+const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
+
 route.get("/", function(req, res){
-    mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err) {
             res.statutMessage = "Connexion BDD impossible";
             return res.status(500).end();
@@ -27,7 +29,7 @@ route.get("/", function(req, res){
 });
 
 route.post("/", function (req, res) {
-    mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err)
             return res.status(500).json({message: "Connexion BDD impossible"});
         else{
@@ -51,7 +53,7 @@ route.post("/", function (req, res) {
 });
 
 route.delete("/", function (req, res) {
-    mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err)
             return res.status(500).json({message: "Connexion BDD impossible"});
         else{
