@@ -1,7 +1,7 @@
 const baseString = "<nav class=\"navbar navbar-expand-md navbar-dark bg-dark\">\n" +
     "        <div class=\"container\">\n" +
     "            <a class=\"btn btn-dark\" href=\"index.html\">\n" +
-    "                <i class=\"fa fa-home\"></i> Accueil\n" +
+    "                 Accueil\n" +
     "            </a>\n" +
     "\n";
 
