@@ -17,6 +17,7 @@
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="deleteproject.js" defer></script>
 </head>
 
 <body class="container">
@@ -25,8 +26,8 @@
             <h1 class="jumbotron-heading">Êtes-vous certains de vouloir supprimer ce projet ?</h1>
         </div>
     </section>
-    <p style="text-align: center;"><button type="submit" class="btn btn-success">Valider</button>
-        <a type="button" class="btn btn-danger" href="myprojects.html">Annuler</a></p>
+    <p style="text-align: center;"><a id="ok" type="button" class="btn btn-success">Valider</button>
+        <a type="button" id="cancel" class="btn btn-danger">Annuler</a></p>
 </body>
 
 </html>
