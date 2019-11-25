@@ -13,11 +13,11 @@ function onClick()
     const login = document.getElementById('login').value;
     const mdp = document.getElementById('password').value;
     const societe = document.getElementById('societe').value;
-	
+
 	var params = {nom:nom, prenom:prenom, mail:mail, login:login, mdp:mdp, societe:societe};
 
-    var my_init = {
-        method: 'POST',
+	var my_init = {
+	    method: 'POST',
         headers: my_headers,
         mode: 'cors',
         cache: 'default',

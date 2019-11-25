@@ -12,13 +12,16 @@ var userSchema = new mongoose.Schema({
 });
 var userModel = mongoose.model('user', userSchema, 'user');
 
+const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
+const errorConnect = "Connexion BDD impossible";
+
 route.get("/", function(req, res){
-    mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err){
         if(err) {
-            res.statusMessage = "Connexion BDD impossible";
+            res.statusMessage = errorConnect;
             return res.status(500).end();
         }else{
-            userModel.findOne({Login:req.query.login, Password:req.query.password}, function(err, doc){
+            userModel.findOne({Login:req.query.login, Password:req.query.mdp}, function(err, doc){
                 if(err) {
                     res.statusMessage = "Echec vérification identifiants";
                     mongoose.connection.close();
@@ -39,9 +42,9 @@ route.get("/", function(req, res){
 });
 
 route.post("/", function (req, res) {
-    mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err){
         if(err) {
-            res.statusMessage = "Connexion BDD impossible";
+            res.statusMessage = errorConnect;
             return res.status(500).end();
         }else{
             userModel.findOne({Login:req.body.login}, function(err, doc){
@@ -99,9 +102,9 @@ route.post("/", function (req, res) {
 });
 
 route.put("/", function (req, res) {
-    mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err){
         if(err) {
-            res.statusMessage = "Connexion BDD impossible";
+            res.statusMessage = errorConnect;
             return res.status(500).end();
         }else{
             userModel.findOne({Login:req.body.login}, function(err, doc){
