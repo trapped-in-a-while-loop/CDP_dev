@@ -1,10 +1,12 @@
+const baseString = "<nav class=\"navbar navbar-expand-md navbar-dark bg-dark\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <a class=\"btn btn-dark\" href=\"index.html\">\n" +
+    "                <i class=\"fa fa-home\"></i> Accueil\n" +
+    "            </a>\n" +
+    "\n";
+
 if(document.cookie.includes("login=")){
-    document.write("<nav class=\"navbar navbar-expand-md navbar-dark bg-dark\">\n" +
-        "        <div class=\"container\">\n" +
-        "            <a class=\"btn btn-dark\" href=\"index.html\">\n" +
-        "                <i class=\"fa fa-home\"></i> Accueil\n" +
-        "            </a>\n" +
-        "\n" +
+    document.write(baseString +
         "            <div class=\"container\">\n" +
         "                <div class=\"dropdown\">\n" +
         "                    <button class=\"btn btn-success btn-sm ml-3 dropdown-toggle\" id=\"menu1\" type=\"button\"\n" +
@@ -25,12 +27,7 @@ if(document.cookie.includes("login=")){
         "        </div>\n" +
         "    </nav>");
 }else
-    document.write("<nav class=\"navbar navbar-expand-md navbar-dark bg-dark\">\n" +
-        "        <div class=\"container\">\n" +
-        "            <a class=\"btn btn-dark\" href=\"index.html\">\n" +
-        "                <i class=\"fa fa-home\"></i> Accueil\n" +
-        "            </a>\n" +
-        "\n" +
+    document.write(baseString +
         "            <div class=\"collapse navbar-collapse justify-content-end\" id=\"navbarsExampleDefault\">\n" +
         "\n" +
         "\n" +
