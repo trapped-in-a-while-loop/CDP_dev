@@ -13,7 +13,7 @@ const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.
 const errorConnect = "Connexion BDD impossible";
 
 route.get("/", function(req, res){
-    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err) {
+    return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err) {
         if (err) {
             res.statutMessage = errorConnect;
             return res.status(500).end();
@@ -30,7 +30,7 @@ route.get("/", function(req, res){
 });
 
 route.post("/", function (req, res) {
-    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err){
+    return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err)
             return res.status(500).json({message: errorConnect});
         else{
@@ -41,10 +41,10 @@ route.post("/", function (req, res) {
             project.save(function(err){
                 if(err){
                     res.statusMessage = "Echec de la création du projet";
-                    mongoose.connection.close();
+                    return mongoose.connection.close();
                     return res.status(500).end();
                 }else{
-                    mongoose.connection.close();
+                    return mongoose.connection.close();
                     res.statusMessage = "Création du projet réussie";
                     return res.status(201).end();
                 }
@@ -54,7 +54,7 @@ route.post("/", function (req, res) {
 });
 
 route.delete("/", function (req, res) {
-    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err){
+    return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err)
             return res.status(500).json({message: errorConnect});
         else{
@@ -62,10 +62,10 @@ route.delete("/", function (req, res) {
             projectModel.findByIdAndRemove(id, function(err){
                 if(err){
                     res.statusMessage = "Echec de la suppression du projet";
-                    mongoose.connection.close();
+                    return mongoose.connection.close();
                     return res.status(500).end();
                 }else{
-                    mongoose.connection.close();
+                    return mongoose.connection.close();
                     res.statusMessage = "Suppression du projet réussie";
                     return res.status(200).end();
                 }
