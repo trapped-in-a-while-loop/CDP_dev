@@ -16,7 +16,7 @@ const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.
 const errorConnect = "Connexion BDD impossible";
 
 route.get("/", function(req, res){
-    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err){
+    return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err) {
             res.statusMessage = errorConnect;
             return res.status(500).end();
@@ -24,14 +24,14 @@ route.get("/", function(req, res){
             userModel.findOne({Login:req.query.login, Password:req.query.mdp}, function(err, doc){
                 if(err) {
                     res.statusMessage = "Echec vérification identifiants";
-                    mongoose.connection.close();
+                    return mongoose.connection.close();
                     return res.status(500).end();
                 }else{
                     if(doc) {
-                        mongoose.connection.close();
+                        return mongoose.connection.close();
                         return res.status(200).json(doc.toJSON());
                     }else{
-                        mongoose.connection.close();
+                        return mongoose.connection.close();
                         res.statusMessage = "Utilisateur ou mot de passe incorrect";
                         return res.status(401).end();
                     }
@@ -42,19 +42,19 @@ route.get("/", function(req, res){
 });
 
 route.post("/", function (req, res) {
-    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err){
+    return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err) {
             res.statusMessage = errorConnect;
             return res.status(500).end();
         }else{
             userModel.findOne({Login:req.body.login}, function(err, doc){
                 if(err) {
-                    mongoose.connection.close();
+                    return mongoose.connection.close();
                     res.statusMessage = "Echec vérification login";
                     return res.status(500).end();
                 }else{
                     if(doc) {
-                        mongoose.connection.close();
+                        return mongoose.connection.close();
                         res.statusMessage = "Utilisateur existant";
                         return res.status(409).end();
                     }else{
@@ -73,7 +73,7 @@ route.post("/", function (req, res) {
                                 Password : mdp});
                         user.save(function (err) {
                             if(err) {
-                                mongoose.connection.close(function(err){
+                                return mongoose.connection.close(function(err){
                                     if(err) {
                                         res.statusMessage = "Fermeture connexion BDD impossible";
                                         return res.status(500).end();
@@ -83,7 +83,7 @@ route.post("/", function (req, res) {
                                     }
                                 });
                             }else {
-                                mongoose.connection.close(function(err){
+                                return mongoose.connection.close(function(err){
                                     if(err) {
                                         res.statusMessage = "Fermeture connexion BDD impossible";
                                         return res.status(500).end();
@@ -102,19 +102,19 @@ route.post("/", function (req, res) {
 });
 
 route.put("/", function (req, res) {
-    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}).then(function(err){
+    return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err) {
             res.statusMessage = errorConnect;
             return res.status(500).end();
         }else{
             userModel.findOne({Login:req.body.login}, function(err, doc){
                 if(err) {
-                    mongoose.connection.close();
+                    return mongoose.connection.close();
                     res.statusMessage = "Echec vérification login";
                     return res.status(500).end();
                 }else{
                     if(doc && req.body.login !== req.body.oldLogin) {
-                        mongoose.connection.close();
+                        return mongoose.connection.close();
                         res.statusMessage = "Utilisateur existant";
                         return res.status(409).end();
                     }else{
@@ -133,11 +133,11 @@ route.put("/", function (req, res) {
                             Login : login,
                             Password : mdp}, function(err, result){
                             if(err){
-                                mongoose.connection.close();
+                                return mongoose.connection.close();
                                 res.statusMessage = "Echec de la mise à jour du compte";
                                 return res.status(500).end();
                             }else {
-                                mongoose.connection.close();
+                                return mongoose.connection.close();
                                 return res.status(200).end();
                             }
                             });
