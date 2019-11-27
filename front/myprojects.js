@@ -9,7 +9,7 @@ function readCookie(name) {
     return null;
 }
 
-const url = 'http://localhost:3000/project';
+const url = 'http://localhost:3000/project/login';
 
 const login = readCookie("login");
 
@@ -28,15 +28,21 @@ fetch(url+"?login="+login)
                     cpt += 1;
                 });
                 cpt -= 1;
-                var globCpt = cpt;
+                var delCpt = cpt;
+                var editCpt = cpt;
                 document.querySelector("#projects").innerHTML = result;
                 while(cpt>=0){
                     document.querySelector("#delete"+cpt).addEventListener('click', function(){
-
-                        const id = data[globCpt]["_id"];
+                        const id = data[delCpt]["_id"];
                         document.cookie = "id="+id+"; path=./*";
                         document.location.href = "deleteproject.html"
-                        globCpt -= 1;
+                        delCpt -= 1;
+                    });
+                    document.querySelector("#edit"+cpt).addEventListener('click', function(){
+                        const id = data[editCpt]["_id"];
+                        document.cookie = "id="+id+"; path=./*";
+                        document.location.href = "editproject.html"
+                        editCpt -= 1;
                     });
                     cpt -= 1;
                 }

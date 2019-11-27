@@ -12,7 +12,7 @@ var projectModel = mongoose.model('project', projectSchema, 'project');
 const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
 const errorConnect = "Connexion BDD impossible";
 
-route.get("/", function(req, res){
+route.get("/login", function(req, res){
     return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err) {
         if (err) {
             res.statutMessage = errorConnect;
@@ -21,6 +21,23 @@ route.get("/", function(req, res){
             projectModel.find({Login: req.query.login}).lean().exec(function (err, docs) {
                 if (err) {
                     res.statusMessage = "Echec récupération projets";
+                    return res.status(500).end();
+                } else
+                    return res.end(JSON.stringify(docs));
+            });
+        }
+    });
+});
+
+route.get("/id", function(req, res){
+    return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err) {
+        if (err) {
+            res.statutMessage = errorConnect;
+            return res.status(500).end();
+        } else {
+            projectModel.find({_id: req.query.id}).lean().exec(function (err, docs) {
+                if (err) {
+                    res.statusMessage = "Echec récupération projet";
                     return res.status(500).end();
                 } else
                     return res.end(JSON.stringify(docs));
@@ -68,6 +85,40 @@ route.delete("/", function (req, res) {
                     mongoose.connection.close();
                     res.statusMessage = "Suppression du projet réussie";
                     return res.status(200).end();
+                }
+            });
+        }
+    });
+});
+
+route.put("/", function (req, res) {
+    return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+        if(err) {
+            res.statusMessage = errorConnect;
+            return res.status(500).end();
+        }else{
+            projectModel.findOne({_id:req.body.id}, function(err, doc){
+                if(err) {
+                    mongoose.connection.close();
+                    res.statusMessage = "Echec vérification id";
+                    return res.status(500).end();
+                }else{
+                    const titre = req.body.titre;
+                    const description = req.body.description;
+                    projectModel.update({_id:req.body.id},
+                        {
+                            Titre : titre,
+                            Description : description
+                        }, function(err, result){
+                        if(err){
+                            mongoose.connection.close();
+                            res.statusMessage = "Echec de la mise à jour du projet";
+                            return res.status(500).end();
+                        }else {
+                            mongoose.connection.close();
+                            return res.status(200).end();
+                        }
+                    });
                 }
             });
         }
