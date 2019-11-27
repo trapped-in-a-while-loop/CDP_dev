@@ -24,14 +24,15 @@ route.get("/", function(req, res){
             userModel.findOne({Login:req.query.login, Password:req.query.mdp}, function(err, doc){
                 if(err) {
                     res.statusMessage = "Echec vérification identifiants";
-                    return mongoose.connection.close();
+                    mongoose.connection.close();
                     return res.status(500).end();
                 }else{
                     if(doc) {
-                        return mongoose.connection.close();
+                        mongoose.connection.close();
                         return res.status(200).json(doc.toJSON());
                     }else{
-                        return mongoose.connection.close();
+                        console.log(doc);
+                        mongoose.connection.close();
                         res.statusMessage = "Utilisateur ou mot de passe incorrect";
                         return res.status(401).end();
                     }
@@ -49,12 +50,12 @@ route.post("/", function (req, res) {
         }else{
             userModel.findOne({Login:req.body.login}, function(err, doc){
                 if(err) {
-                    return mongoose.connection.close();
+                    mongoose.connection.close();
                     res.statusMessage = "Echec vérification login";
                     return res.status(500).end();
                 }else{
                     if(doc) {
-                        return mongoose.connection.close();
+                        mongoose.connection.close();
                         res.statusMessage = "Utilisateur existant";
                         return res.status(409).end();
                     }else{
@@ -73,7 +74,7 @@ route.post("/", function (req, res) {
                                 Password : mdp});
                         user.save(function (err) {
                             if(err) {
-                                return mongoose.connection.close(function(err){
+                                mongoose.connection.close(function(err){
                                     if(err) {
                                         res.statusMessage = "Fermeture connexion BDD impossible";
                                         return res.status(500).end();
@@ -83,7 +84,7 @@ route.post("/", function (req, res) {
                                     }
                                 });
                             }else {
-                                return mongoose.connection.close(function(err){
+                                mongoose.connection.close(function(err){
                                     if(err) {
                                         res.statusMessage = "Fermeture connexion BDD impossible";
                                         return res.status(500).end();
@@ -109,12 +110,12 @@ route.put("/", function (req, res) {
         }else{
             userModel.findOne({Login:req.body.login}, function(err, doc){
                 if(err) {
-                    return mongoose.connection.close();
+                    mongoose.connection.close();
                     res.statusMessage = "Echec vérification login";
                     return res.status(500).end();
                 }else{
                     if(doc && req.body.login !== req.body.oldLogin) {
-                        return mongoose.connection.close();
+                        mongoose.connection.close();
                         res.statusMessage = "Utilisateur existant";
                         return res.status(409).end();
                     }else{
@@ -133,11 +134,11 @@ route.put("/", function (req, res) {
                             Login : login,
                             Password : mdp}, function(err, result){
                             if(err){
-                                return mongoose.connection.close();
+                                mongoose.connection.close();
                                 res.statusMessage = "Echec de la mise à jour du compte";
                                 return res.status(500).end();
                             }else {
-                                return mongoose.connection.close();
+                                mongoose.connection.close();
                                 return res.status(200).end();
                             }
                             });

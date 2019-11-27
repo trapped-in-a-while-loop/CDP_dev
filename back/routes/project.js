@@ -41,10 +41,10 @@ route.post("/", function (req, res) {
             project.save(function(err){
                 if(err){
                     res.statusMessage = "Echec de la création du projet";
-                    return mongoose.connection.close();
+                    mongoose.connection.close();
                     return res.status(500).end();
                 }else{
-                    return mongoose.connection.close();
+                    mongoose.connection.close();
                     res.statusMessage = "Création du projet réussie";
                     return res.status(201).end();
                 }
@@ -62,10 +62,10 @@ route.delete("/", function (req, res) {
             projectModel.findByIdAndRemove(id, function(err){
                 if(err){
                     res.statusMessage = "Echec de la suppression du projet";
-                    return mongoose.connection.close();
+                    mongoose.connection.close();
                     return res.status(500).end();
                 }else{
-                    return mongoose.connection.close();
+                    mongoose.connection.close();
                     res.statusMessage = "Suppression du projet réussie";
                     return res.status(200).end();
                 }

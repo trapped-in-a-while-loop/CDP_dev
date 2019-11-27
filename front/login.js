@@ -12,7 +12,7 @@ function onClick()
 
     var params = {login:login, mdp:mdp};
 
-    fetch(url+"?login="+login+"&password="+mdp)
+    fetch(url+"?login="+login+"&mdp="+mdp)
         .then(function(res)
         {
             if(res.status === 200){
