@@ -9,11 +9,12 @@ function readCookie(name) {
     return null;
 }
 
-const url = 'http://localhost:3000/project/login';
+const url = 'http://localhost:3000/project/';
 
 const login = readCookie("login");
 
-fetch(url+"?login="+login)
+//Owned projects
+fetch(url+"proprietaire?login="+login)
     .then(function(res)
     {
         if(res.status === 200) {
@@ -30,6 +31,7 @@ fetch(url+"?login="+login)
                 cpt -= 1;
                 var delCpt = cpt;
                 var editCpt = cpt;
+                var manageCpt = cpt;
                 document.querySelector("#projects").innerHTML = result;
                 while(cpt>=0){
                     document.querySelector("#delete"+cpt).addEventListener('click', function(){
@@ -44,6 +46,12 @@ fetch(url+"?login="+login)
                         document.location.href = "editproject.html"
                         editCpt -= 1;
                     });
+                    document.querySelector("#manage"+cpt).addEventListener('click', function(){
+                        const id = data[editCpt]["_id"];
+                        document.cookie = "id="+id+"; path=./*";
+                        document.location.href = "manageproject.html"
+                        editCpt -= 1;
+                    });
                     cpt -= 1;
                 }
             });
@@ -52,3 +60,24 @@ fetch(url+"?login="+login)
     }).catch(function(err){
     console.log(err.message);
 });
+
+function displayNoOnwerProjects(addr){
+    fetch(addr)
+        .then(function(res)
+        {
+            if(res.status === 200) {
+                res.json().then(function(data){
+                    var result = "";
+                    var cpt = 0;
+                    data.forEach(item => result += item["Titre"]+"\n");
+                    document.querySelector("#projects").innerHTML += result;
+                });
+            }else
+                alert(res.statusText);
+        }).catch(function(err){
+        console.log(err.message);
+    });
+}
+
+displayNoOnwerProjects(url+"developpeur?login="+login);
+displayNoOnwerProjects(url+"client?login="+login);

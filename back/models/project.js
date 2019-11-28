@@ -1,13 +1,20 @@
 var mongoose = require('mongoose');
 
-var user = require('./user');
+var customUserSchema = new mongoose.Schema({
+    Nom : { type: String, required: true},
+    Prenom : { type: String, required: true},
+    Mail : { type: String, required: true},
+    Societe : { type: String, required: true},
+    Login : { type: String, required: true},
+    Password : { type: String, required: true}
+});
 
 var projectSchema = new mongoose.Schema({
     Titre : { type: String, required: true},
     Description : { type: String},
-    Proprietaire : { type: user.userSchema, required: true},
-    Developpeurs : {type: [user.userSchema]},
-    Clients : {type: [user.userSchema]}
+    Proprietaire : { type: customUserSchema, required: true},
+    Developpeurs : {type: [customUserSchema]},
+    Clients : {type: [customUserSchema]}
 });
 var projectModel = mongoose.model('project', projectSchema, 'project');
 
