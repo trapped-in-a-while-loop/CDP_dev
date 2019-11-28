@@ -1,16 +1,7 @@
 let express = require('express');
 let route = express.Router();
 var mongoose = require('mongoose');
-
-var userSchema = new mongoose.Schema({
-    Nom : { type: String, required: true},
-    Prenom : { type: String, required: true},
-    Mail : { type: String, required: true},
-    Societe : { type: String, required: true},
-    Login : { type: String, required: true, unique: true},
-    Password : { type: String, required: true}
-});
-var userModel = mongoose.model('user', userSchema, 'user');
+var user = require('../models/user');
 
 const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
 const errorConnect = "Connexion BDD impossible";
@@ -21,7 +12,7 @@ route.get("/", function(req, res){
             res.statusMessage = errorConnect;
             return res.status(500).end();
         }else{
-            userModel.findOne({Login:req.query.login, Password:req.query.mdp}, function(err, doc){
+            user.userModel.findOne({Login:req.query.login, Password:req.query.mdp}, function(err, doc){
                 if(err) {
                     res.statusMessage = "Echec vérification identifiants";
                     mongoose.connection.close();
@@ -48,7 +39,7 @@ route.post("/", function (req, res) {
             res.statusMessage = errorConnect;
             return res.status(500).end();
         }else{
-            userModel.findOne({Login:req.body.login}, function(err, doc){
+            user.userModel.findOne({Login:req.body.login}, function(err, doc){
                 if(err) {
                     mongoose.connection.close();
                     res.statusMessage = "Echec vérification login";
@@ -65,7 +56,7 @@ route.post("/", function (req, res) {
                         const societe = req.body.societe;
                         const login = req.body.login;
                         const mdp = req.body.mdp;
-                        var user = new userModel(
+                        var user = new user.userModel(
                             {Nom : nom,
                                 Prenom : prenom,
                                 Mail : mail,
@@ -108,7 +99,7 @@ route.put("/", function (req, res) {
             res.statusMessage = errorConnect;
             return res.status(500).end();
         }else{
-            userModel.findOne({Login:req.body.login}, function(err, doc){
+            user.userModel.findOne({Login:req.body.login}, function(err, doc){
                 if(err) {
                     mongoose.connection.close();
                     res.statusMessage = "Echec vérification login";
@@ -126,7 +117,7 @@ route.put("/", function (req, res) {
                         const societe = req.body.societe;
                         const login = req.body.login;
                         const mdp = req.body.mdp;
-                        userModel.update({Login:oldLogin},
+                        user.userModel.update({Login:oldLogin},
                             {Nom : nom,
                             Prenom : prenom,
                             Mail : mail,
