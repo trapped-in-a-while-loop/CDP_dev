@@ -27,15 +27,19 @@
     </section>
 
     <div class="form-group">
-        <label for="task">Nom</label>
-        <input type="text" name="task" class="form-control" id="task" placeholder="Tâche" required>
+        <label for="titre">Tâche</label>
+        <input type="text" name="titre" class="form-control" id="titre" placeholder="Tâche" required>
     </div>
-    <select class="browser-default custom-select">
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" name="description" class="form-control" id="description" placeholder="Description" required>
+    </div>
+    <select class="browser-default custom-select" id="statut">
         <option value="todo">TO DO</option>
         <option value="pending">PENDING</option>
         <option value="done">DONE</option>
     </select>
-    <p style="text-align: center;"></br><button type="submit" class="btn btn-primary">Créer</button>
+    <p style="text-align: center;"></br><button id="create" class="btn btn-primary">Créer</button>
         <a type="button" class="btn btn-secondary" href="task.html">Annuler</a></p>
 </body>
 
