@@ -1,5 +1,4 @@
 <h2>Release 2.0 du 06/12/2019</h2>
------------------------------------------
 
 Après avoir téléchargé la release, l'utilisateur doit se placer dans la racine du projet (plus specifiquement là où se trouve le fichier *docker-compose.yml*).
 Celui-ci lance ensuite la commande suivante dans son terminal:
