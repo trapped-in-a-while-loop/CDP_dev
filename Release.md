@@ -1,10 +1,10 @@
 <h2>Release 2.0 du 06/12/2019</h2>
 
 Après avoir téléchargé la release, l'utilisateur doit se placer dans la racine du projet (plus specifiquement là où se trouve le fichier *docker-compose.yml*).
-Celui-ci lance ensuite la commande suivante dans son terminal:
+Celui-ci lance ensuite la commande suivante dans son terminal:</br>
 *docker-compose up*
 
-Ensuite l'utilisateur n'a plus qu'à rentrer la commande suivante pour se connecter à la page d'accueil du projet:
+Ensuite l'utilisateur n'a plus qu'à rentrer la commande suivante pour se connecter à la page d'accueil du projet:</br>
 *firefox ./front/index.html*
 
 Pour lancer les tests l'utilisateur doit rentrer les commandes suivantes:
