@@ -1,14 +1,7 @@
 let express = require('express');
 let route = express.Router();
 var mongoose = require('mongoose');
-
-var testSchema = new mongoose.Schema({
-    IDProjet : {type: String, required: true},
-    testGiven : {type: String, required: true},
-    testWhen : {type: String, required: true},
-    testThen : {type: String, required: true}
-});
-var testModel = mongoose.model('test', testSchema, 'test');
+var test = require('../models/test');
 
 route.get("/", function(req, res) {
     mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true}, function (err) {
@@ -28,7 +21,7 @@ route.post("/", function (req, res) {
             var given = req.body.given;
             var when = req.body.when;
             var then = req.body.then;
-            var test = new testModel({IDProjet: idprojet, testGiven: given, testWhen: when, testThen: then});
+            var test = new test.testModel({IDProjet: idprojet, testGiven: given, testWhen: when, testThen: then});
             test.save(function (err) {
                 if (err) {
                     res.statusMessage = "Échec de la création du test";
