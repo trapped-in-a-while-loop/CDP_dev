@@ -14,70 +14,79 @@ const url = 'http://localhost:3000/project/';
 const login = readCookie("login");
 
 //Owned projects
-fetch(url+"proprietaire?login="+login)
-    .then(function(res)
-    {
-        if(res.status === 200) {
-            res.json().then(function(data){
-                var result = "";
-                var cpt = 0;
+fetch(url + "proprietaire?login=" + login)
+    .then(function (res) {
+        if (res.status === 200) {
+            res.json().then(function (data) {
+                let cpt = 0;
                 data.forEach(item => {
-                    result += item["Titre"]+"\n" +
-                        "        <a type=\"button\" id=\"delete" + cpt + "\" class=\"btn btn-danger\">Supprimer</a>\n" +
-                        "        <a type=\"button\" id=\"edit" + cpt + "\" class=\"btn btn-primary\">Editer</a>\n" +
-                        "        <a type=\"button\" id=\"manage" + cpt + "\" class=\"btn btn-info\">Gérer</a></br>";
-                    cpt += 1;
+                    document.querySelector("#projects").innerHTML += item["Titre"];
+                    let deleteButton = document.createElement("a");
+                    deleteButton.setAttribute("type", "button");
+                    deleteButton.setAttribute("id", "delete_"+cpt);
+                    deleteButton.setAttribute("class", "btn btn-danger");
+                    deleteButton.innerHTML = "Supprimer";
+
+                    let editButton = document.createElement("a");
+                    editButton.setAttribute("type", "button");
+                    editButton.setAttribute("id", "edit_"+cpt);
+                    editButton.setAttribute("class", "btn btn-primary");
+                    editButton.innerHTML = "Éditer";
+
+                    let manageButton = document.createElement("a");
+                    manageButton.setAttribute("type", "button");
+                    manageButton.setAttribute("id", "manage_"+cpt);
+                    manageButton.setAttribute("class", "btn btn-info");
+                    manageButton.innerHTML = "Gérer";
+
+                    document.addEventListener('click', function(e){
+                        if(e.target && e.target.id.split("_")[0].localeCompare("delete")===0) {
+                            const index = parseInt(e.target.id.split("_")[1], 10);
+                            const id = data[index]["_id"];
+                            document.cookie = "id=" + id + "; path=./*";
+                            document.location.href = "deleteproject.html";
+                        }
+                        else if(e.target && e.target.id.split("_")[0].localeCompare("edit")===0) {
+                            const index = parseInt(e.target.id.split("_")[1], 10);
+                            const id = data[index]["_id"];
+                            document.cookie = "id=" + id + "; path=./*";
+                            document.location.href = "editproject.html";
+                        }
+                        else if(e.target && e.target.id.split("_")[0].localeCompare("manage")===0) {
+                            const index = parseInt(e.target.id.split("_")[1], 10);
+                            const id = data[index]["_id"];
+                            document.cookie = "id=" + id + "; path=./*";
+                            document.location.href = "manageproject.html";
+                        }
+                    });
+
+                    document.querySelector('#projects').append(deleteButton, editButton, manageButton);
+                    document.querySelector("#projects").append(document.createElement("br"));
+                    cpt ++;
                 });
-                cpt -= 1;
-                var delCpt = cpt;
-                var editCpt = cpt;
-                var manageCpt = cpt;
-                document.querySelector("#projects").innerHTML = result;
-                while(cpt>=0){
-                    document.querySelector("#delete"+cpt).addEventListener('click', function(){
-                        const id = data[delCpt]["_id"];
-                        document.cookie = "id="+id+"; path=./*";
-                        document.location.href = "deleteproject.html"
-                        delCpt -= 1;
-                    });
-                    document.querySelector("#edit"+cpt).addEventListener('click', function(){
-                        const id = data[editCpt]["_id"];
-                        document.cookie = "id="+id+"; path=./*";
-                        document.location.href = "editproject.html"
-                        editCpt -= 1;
-                    });
-                    document.querySelector("#manage"+cpt).addEventListener('click', function(){
-                        const id = data[editCpt]["_id"];
-                        document.cookie = "id="+id+"; path=./*";
-                        document.location.href = "manageproject.html"
-                        editCpt -= 1;
-                    });
-                    cpt -= 1;
-                }
             });
-        }else
+        } else
             alert(res.statusText);
-    }).catch(function(err){
+    }).catch(function (err) {
     console.log(err.message);
 });
 
-function displayNoOnwerProjects(addr){
+function displayNoOnwerProjects(addr) {
     fetch(addr)
-        .then(function(res)
-        {
-            if(res.status === 200) {
-                res.json().then(function(data){
+        .then(function (res) {
+            if (res.status === 200) {
+                res.json().then(function (data) {
                     var result = "";
                     var cpt = 0;
-                    data.forEach(item => result += item["Titre"]+"\n");
+                    data.forEach(item => result += item["Titre"] + "\n");
                     document.querySelector("#projects").innerHTML += result;
                 });
-            }else
+            } else
                 alert(res.statusText);
-        }).catch(function(err){
+        }).catch(function (err) {
         console.log(err.message);
     });
 }
 
-displayNoOnwerProjects(url+"developpeur?login="+login);
-displayNoOnwerProjects(url+"client?login="+login);
+displayNoOnwerProjects(url + "developpeur?login=" + login);
+displayNoOnwerProjects(url + "client?login=" + login);

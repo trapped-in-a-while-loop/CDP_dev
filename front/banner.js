@@ -53,7 +53,9 @@ if(document.cookie.includes("login=")){
         "        </div>\n" +
         "    </nav>");
 
-document.querySelector("#deconnect").addEventListener("click", onClick);
+var disconnectButton = document.querySelector("#deconnect");
+if(disconnectButton)
+    disconnectButton.addEventListener("click", onClick);
 
 function onClick(){
     document.cookie = 'login=deco; expires=Fri, 01 Jan 2010 00:0:00 UTC; path=./*';
