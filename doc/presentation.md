@@ -4,7 +4,7 @@ L'architecture du projet est construite sous la forme Model-View-Controller. A l
 on trouve donc les modules suivants:
 * model, qui contient les modèles utilisés par l'application et la base de donnée.
 * view, qui contient tous les fichiers relatifs à l'interface graphique.
-* controller, qui contient tous les fichiers relatifs à la gestion des interractions avec la base de donnée.
+* controller, qui contient tous les fichiers relatifs à la gestion des interractions avec la base de donnée.</br>
 On trouve également les répertoires:
 * issue, qui contient des informations relatives aux issues pour chaque sprint lors de la conception du projet.
 * task, qui contient des informations relatives aux tâches pour chaque sprint lors de la conception du projet.
