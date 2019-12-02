@@ -9,22 +9,49 @@ function readCookie(name) {
     return null;
 }
 
+fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(function(res){
+    res.json().then(function(res) {
+        res[0]["Developpeurs"].forEach(dev => {
+            var oneDev = document.createElement("p");
+            var content = dev["Login"] + ", " + dev["Nom"] + ", " + dev["Prenom"];
+            oneDev.innerHTML = content;
+            var but = document.createElement("a");
+            but.type = "button";
+            but.className = "btn btn-danger";
+            but.href = "deletemember.html";
+            but.innerHTML = "Supprimer";
+            oneDev.appendChild(but);
+            document.querySelector("#devs").appendChild(oneDev);
+        });
+        res[0]["Clients"].forEach(client => {
+            var oneClient = document.createElement("p");
+            var content = client["Login"] + ", " + client["Nom"] + ", " + client["Prenom"];
+            oneClient.innerHTML = content;
+            var but = document.createElement("a");
+            but.type = "button";
+            but.className = "btn btn-danger";
+            but.href = "deletemember.html";
+            but.innerHTML = "Supprimer";
+            oneClient.appendChild(but);
+            document.querySelector("#clients").appendChild(oneClient);
+        });
+    });
+});
+
 document.querySelector("#cancel").addEventListener("click", onClick);
 document.querySelector("#saveDeveloppeur").addEventListener("click", onClickDeveloppeur);
 document.querySelector("#saveClient").addEventListener("click", onClickClient);
 
-function onClickOk() {
-    if (document.cookie.includes("id=")) {
-
-        const url = 'http://localhost:3000/project';
+function onClickDeveloppeur() {
+    if (document.cookie.includes("id=")){
+        const url = 'http://localhost:3000/project/developpeur';
         const my_headers = new Headers();
         my_headers.append("Content-Type", "application/json");
 
         const id = readCookie("id");
-        const titre = document.querySelector("#titre").value;
-        const description = document.querySelector("#description").value;
+        const developpeur = document.querySelector("#developpeur").value;
 
-        var params = { id: id, titre: titre, description: description };
+        var params = { id: id, developpeur: developpeur };
 
         var my_init = {
             method: 'PUT',
@@ -37,16 +64,50 @@ function onClickOk() {
         fetch(url, my_init)
             .then(function (res) {
                 if (res.status === 200) {
-                    alert("Projet modifié");
+                    alert("Développeur ajouté");
                     document.cookie = 'id=no_id; expires=Fri, 01 Jan 2010 00:0:00 UTC; path=./*';
-                    document.location.href = "myprojects.html";
+                    window.location.reload();
                 }
                 else
                     alert(res.statusText);
             }).catch(function (err) {
             console.log(err.message);
         });
+    }
+}
 
+function onClickClient() {
+    if (document.cookie.includes("id=")) {
+
+        const url = 'http://localhost:3000/project/client';
+        const my_headers = new Headers();
+        my_headers.append("Content-Type", "application/json");
+
+        const id = readCookie("id");
+        const client = document.querySelector("#client").value;
+
+        var params = { id: id, client: client };
+
+        var my_init = {
+            method: 'PUT',
+            headers: my_headers,
+            mode: 'cors',
+            cache: 'default',
+            body: JSON.stringify(params)
+        };
+
+        fetch(url, my_init)
+            .then(function (res) {
+                if (res.status === 200) {
+                    alert("Client ajouté");
+                    document.cookie = 'id=no_id; expires=Fri, 01 Jan 2010 00:0:00 UTC; path=./*';
+                    window.location.reload();
+                }
+                else
+                    alert(res.statusText);
+            }).catch(function (err) {
+            console.log(err.message);
+        });
     }
 }
 

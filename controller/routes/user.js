@@ -7,29 +7,21 @@ const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.
 const errorConnect = "Connexion BDD impossible";
 
 route.get("/", function(req, res){
-    console.log("enter");
     return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err) {
-            console.log("err connect bd");
             res.statusMessage = errorConnect;
             return res.status(500).end();
         }else{
-            console.log("connect bd ok");
             user.userModel.findOne({Login:req.query.login, Password:req.query.mdp}, function(err, doc){
-                console.log("en cours");
                 if(err) {
-                    console.log("err get identifiants");
                     res.statusMessage = "Echec vérification identifiants";
                     mongoose.connection.close();
                     return res.status(500).end();
                 }else{
-                    console.log("get identifiants ok");
                     if(doc) {
-                        console.log("identifiant existe");
                         mongoose.connection.close();
                         return res.status(200).json(doc.toJSON());
                     }else{
-                        console.log(doc);
                         mongoose.connection.close();
                         res.statusMessage = "Utilisateur ou mot de passe incorrect";
                         return res.status(401).end();
