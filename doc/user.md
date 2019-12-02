@@ -3,7 +3,7 @@ Documentation utilisateur pour la release 2.0 du 06/12/2019
 
 Ce projet est destiné à être utilisé dans le but d'aider une équipe à concevoir d'autres projets.
 Afin de permettre d'identifier les rôles de chacun pour chaque projet, il est necessaire de
-s'authentifier (et de s'inscrire avant) sur l'application.
+s'authentifier (et de s'inscrire avant) sur l'outil.
 
 Quel rôle m'est attribué ?
 --------------------------
