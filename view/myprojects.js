@@ -18,6 +18,7 @@ fetch(url + "proprietaire?login=" + login)
     .then(function (res) {
         if (res.status === 200) {
             res.json().then(function (data) {
+                console.log(data);
                 let cpt = 0;
                 data.forEach(item => {
                     document.querySelector("#projects").innerHTML += item["Titre"];

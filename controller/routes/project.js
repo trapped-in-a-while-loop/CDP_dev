@@ -13,15 +13,13 @@ route.get("/proprietaire", function(req, res){
             res.statutMessage = errorConnect;
             return res.status(500).end();
         } else {
-            console.log("avant find");
             project.projectModel.find({'Proprietaire.Login': req.query.login}).lean().exec(function (err, docs) {
-                console.log("callback project");
                 if (err) {
                     console.log(err);
                     res.statusMessage = "Echec récupération projets";
                     return res.status(500).end();
                 } else
-                    return res.end(JSON.stringify(docs));
+                    return res.status(200).end(JSON.stringify(docs));
             });
         }
     });
@@ -168,7 +166,7 @@ route.put("/", function (req, res) {
         }
     });
 });
-/*
+
 route.put("/developpeur", function (req, res) {
     return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err) {
@@ -181,21 +179,32 @@ route.put("/developpeur", function (req, res) {
                     res.statusMessage = "Echec vérification id";
                     return res.status(500).end();
                 }else{
-                    const login = req.body.login;
-                    project.projectModel.update({_id:req.body.id},
-                        {
-                            Titre : titre,
-                            Description : description
-                        }, function(err, result){
-                            if(err){
-                                mongoose.connection.close();
-                                res.statusMessage = "Echec de la mise à jour du projet";
-                                return res.status(500).end();
-                            }else {
-                                mongoose.connection.close();
-                                return res.status(200).end();
-                            }
-                        });
+                    const developpeur = req.body.developpeur;
+                    user.userModel.findOne({Login:developpeur}, function(err, dev){
+                        if(err){
+                            mongoose.connection.close();
+                            res.statusMessage = "Developpeur inexistant";
+                            return res.status(500).end();
+                        }else if(dev){
+                            doc.Developpeurs.push(dev);
+                            doc.save(function(err){
+                                if(err){
+                                    console.log(err);
+                                    res.statusMessage = "Echec de l'ajout du développeur'";
+                                    mongoose.connection.close();
+                                    return res.status(500).end();
+                                }else{
+                                    mongoose.connection.close();
+                                    res.statusMessage = "Ajout du développeur réussi";
+                                    return res.status(201).end();
+                                }
+                            });
+                        }else{
+                            mongoose.connection.close();
+                            res.statusMessage = "Client inexistant";
+                            return res.status(201).end();
+                        }
+                    });
                 }
             });
         }
@@ -214,26 +223,36 @@ route.put("/client", function (req, res) {
                     res.statusMessage = "Echec vérification id";
                     return res.status(500).end();
                 }else{
-                    const titre = req.body.titre;
-                    const description = req.body.description;
-                    project.projectModel.update({_id:req.body.id},
-                        {
-                            Titre : titre,
-                            Description : description
-                        }, function(err, result){
-                            if(err){
-                                mongoose.connection.close();
-                                res.statusMessage = "Echec de la mise à jour du projet";
-                                return res.status(500).end();
-                            }else {
-                                mongoose.connection.close();
-                                return res.status(200).end();
-                            }
-                        });
+                    const client = req.body.client;
+                    user.userModel.findOne({Login:client}, function(err, client){
+                        if(err){
+                            mongoose.connection.close();
+                            res.statusMessage = "Echec récupération infos client";
+                            return res.status(500).end();
+                        }else if (client){
+                            doc.Clients.push(client);
+                            doc.save(function(err){
+                                if(err){
+                                    console.log(err);
+                                    res.statusMessage = "Echec de l'ajout du client'";
+                                    mongoose.connection.close();
+                                    return res.status(500).end();
+                                }else{
+                                    mongoose.connection.close();
+                                    res.statusMessage = "Ajout du client réussi";
+                                    return res.status(201).end();
+                                }
+                            });
+                        }else{
+                            mongoose.connection.close();
+                            res.statusMessage = "Client inexistant";
+                            return res.status(201).end();
+                        }
+                    });
                 }
             });
         }
     });
-});*/
+});
 
 module.exports = route;
