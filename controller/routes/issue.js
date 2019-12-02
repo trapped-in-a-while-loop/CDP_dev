@@ -11,6 +11,15 @@ route.get("/", function(req, res) {
     if (err) {
       res.statusMessage = errorConnect;
       return res.status(500).end();
+    } else {
+      issue.issueModel.find({'IDProjet': req.query.idprojet}).lean().exec(function (err, docs) {
+        if (err) {
+          console.log(err);
+          res.statusMessage = "Échec récupération issues";
+          return res.status(500).end();
+        } else
+          return res.end(JSON.stringify(docs));
+      });
     }
   });
 });
