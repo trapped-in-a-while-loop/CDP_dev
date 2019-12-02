@@ -13,7 +13,9 @@ route.get("/proprietaire", function(req, res){
             res.statutMessage = errorConnect;
             return res.status(500).end();
         } else {
+            console.log("avant find");
             project.projectModel.find({'Proprietaire.Login': req.query.login}).lean().exec(function (err, docs) {
+                console.log("callback project");
                 if (err) {
                     console.log(err);
                     res.statusMessage = "Echec récupération projets";
