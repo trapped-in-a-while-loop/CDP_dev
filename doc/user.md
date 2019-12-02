@@ -2,7 +2,7 @@ Ce projet est destiné à être utilisé dans le but d'aider une équipe à conc
 Afin de permettre d'identifier les rôles de chacun pour chaque projet, il est necessaire de
 s'authentifier (et de s'inscrire avant) sur l'application.
 
-Quel rôle m'ait attribué ?
+Quel rôle m'est attribué ?
 --------------------------
 
 L'utilisateur peut avoir 4 rôles pour un projet P:
