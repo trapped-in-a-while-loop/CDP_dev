@@ -72,14 +72,14 @@ fetch(url + "proprietaire?login=" + login)
     console.log(err.message);
 });
 
-function displayNoOnwerProjects(addr) {
+function displayNoOwnerProjects(addr, role) {
     fetch(addr)
         .then(function (res) {
             if (res.status === 200) {
                 res.json().then(function (data) {
                     var result = "";
                     var cpt = 0;
-                    data.forEach(item => result += item["Titre"] + "\n");
+                    data.forEach(item => result += item["Titre"] + " (" + role + ")\n");
                     document.querySelector("#projects").innerHTML += result;
                 });
             } else
@@ -89,5 +89,5 @@ function displayNoOnwerProjects(addr) {
     });
 }
 
-displayNoOnwerProjects(url + "developpeur?login=" + login);
-displayNoOnwerProjects(url + "client?login=" + login);
+displayNoOwnerProjects(url + "developpeur?login=" + login, "Développeur");
+displayNoOwnerProjects(url + "client?login=" + login, "Client");

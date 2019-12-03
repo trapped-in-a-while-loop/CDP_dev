@@ -63,10 +63,9 @@ function onClickDeveloppeur() {
 
         fetch(url, my_init)
             .then(function (res) {
-                if (res.status === 200) {
+                if (res.status === 201) {
                     alert("Développeur ajouté");
-                    document.cookie = 'id=no_id; expires=Fri, 01 Jan 2010 00:0:00 UTC; path=./*';
-                    window.location.reload();
+                    document.location.reload();
                 }
                 else
                     alert(res.statusText);
@@ -98,10 +97,9 @@ function onClickClient() {
 
         fetch(url, my_init)
             .then(function (res) {
-                if (res.status === 200) {
+                if (res.status === 201) {
                     alert("Client ajouté");
-                    document.cookie = 'id=no_id; expires=Fri, 01 Jan 2010 00:0:00 UTC; path=./*';
-                    window.location.reload();
+                    document.location.reload();
                 }
                 else
                     alert(res.statusText);
