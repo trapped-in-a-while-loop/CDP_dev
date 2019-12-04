@@ -2,7 +2,8 @@ module.exports = {
   "env": {
     "browser": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "mongo": true
   },
   "globals": {
     "Atomics": "readonly",
@@ -15,6 +16,10 @@ module.exports = {
   "rules": {
     "semi": ["warn", "always"],
     "quotes": ["warn", "double"],
-    "no-var": "warn"
+    "no-var": "warn",
+    "eqeqeq": ["warn", "always"],
+    "curly": ["warn", "always"],
+    "default-case": ["warn", "always"],
+    "no-multi-spaces": "warn"
   }
 };
