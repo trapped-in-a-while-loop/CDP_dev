@@ -18,12 +18,12 @@ function onClick()
   const my_headers = new Headers();
   my_headers.append("Content-Type", "application/json");
 
-  const idprojet = readCookie("projet");
+  const id = readCookie("id");
   const role = document.getElementById('role');
   const action = document.getElementById('action');
   const raison = document.getElementById('raison');
 
-  var params = {idprojet: idprojet, role: role, action: action, raison: raison};
+  var params = {idprojet: id, role: role, action: action, raison: raison};
 
   var my_init = {
     method: 'POST',

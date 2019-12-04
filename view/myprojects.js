@@ -13,15 +13,22 @@ const url = 'http://localhost:3000/project/';
 
 const login = readCookie("login");
 
+let cpt = 0;
+let data = [];
+
 //Owned projects
 fetch(url + "proprietaire?login=" + login)
     .then(function (res) {
         if (res.status === 200) {
-            res.json().then(function (data) {
-                console.log(data);
-                let cpt = 0;
-                data.forEach(item => {
-                    document.querySelector("#projects").innerHTML += item["Titre"];
+            res.json().then(function (datas) {
+                data = data.concat(datas);
+                datas.forEach(item => {
+                    var titre = document.createElement("a");
+                    titre.setAttribute("type", "button");
+                    titre.setAttribute("id", "titre_"+cpt);
+                    titre.setAttribute("class", "btn btn-link");
+                    titre.innerHTML = item["Titre"];
+
                     let deleteButton = document.createElement("a");
                     deleteButton.setAttribute("type", "button");
                     deleteButton.setAttribute("id", "delete_"+cpt);
@@ -58,10 +65,15 @@ fetch(url + "proprietaire?login=" + login)
                             const id = data[index]["_id"];
                             document.cookie = "id=" + id + "; path=./*";
                             document.location.href = "manageproject.html";
+                        }else if(e.target && e.target.id.split("_")[0].localeCompare("titre")===0){
+                            const index = parseInt(e.target.id.split("_")[1], 10);
+                            const id = data[index]["_id"];
+                            document.cookie = "id=" + id + ", path=./*";
+                            document.location.href = "project.html";
                         }
                     });
 
-                    document.querySelector('#projects').append(deleteButton, editButton, manageButton);
+                    document.querySelector('#projects').append(titre, deleteButton, editButton, manageButton);
                     document.querySelector("#projects").append(document.createElement("br"));
                     cpt ++;
                 });
@@ -76,11 +88,18 @@ function displayNoOwnerProjects(addr, role) {
     fetch(addr)
         .then(function (res) {
             if (res.status === 200) {
-                res.json().then(function (data) {
+                res.json().then(function (datas) {
+                    data = data.concat(datas);
                     var result = "";
-                    var cpt = 0;
-                    data.forEach(item => result += item["Titre"] + " (" + role + ")\n");
-                    document.querySelector("#projects").innerHTML += result;
+                    datas.forEach(item => {
+                        var titre = document.createElement("a");
+                        titre.setAttribute("type", "button");
+                        titre.setAttribute("id", "titre_"+cpt);
+                        titre.setAttribute("class", "btn btn-link");
+                        titre.innerHTML = item["Titre"] + " (" + role + ")\n";
+                        document.querySelector("#projects").append(titre);
+                        cpt++;
+                    });
                 });
             } else
                 alert(res.statusText);

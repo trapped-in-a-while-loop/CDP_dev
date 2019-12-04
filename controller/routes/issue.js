@@ -2,12 +2,13 @@ let express = require('express');
 let route = express.Router();
 var mongoose = require('mongoose');
 var issue = require('../../model/issue');
+var project = require('../../model/project');
 
 const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
 const errorConnect = "Connexion BDD impossible";
 
 route.get("/", function(req, res) {
-  mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function (err) {
+  return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function (err) {
     if (err) {
       res.statusMessage = errorConnect;
       return res.status(500).end();
@@ -25,7 +26,7 @@ route.get("/", function(req, res) {
 });
 
 route.post("/", function (req, res) {
-  mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function (err) {
+  return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function (err) {
     if (err)
       return res.status(500).json({message: errorConnect});
     else {
@@ -33,16 +34,24 @@ route.post("/", function (req, res) {
       var role = req.body.role;
       var action = req.body.action;
       var raison = req.body.raison;
-      var issue = new issue.issueModel({IDProjet: idprojet, Role: role, Action: action, Raison: raison});
-      issue.save(function (err) {
-        if (err) {
-          res.statusMessage = "Échec de la création de l'issue";
+      project.projectModel.findOne({_id:id}, function(err, doc){
+        if(err){
+          res.statusMessage = "Erreur de récupération du projet";
           mongoose.connection.close();
           return res.status(500).end();
         }else{
-          mongoose.connection.close();
-          res.statusMessage = "Création de l'issue réussie";
-          return res.status(201).end();
+          var newIssue = new issue.issueModel({Projet: doc, Role: role, Action: action, Raison: raison});
+          newIssue.save(function (err) {
+            if (err) {
+              res.statusMessage = "Échec de la création de l'issue";
+              mongoose.connection.close();
+              return res.status(500).end();
+            }else{
+              mongoose.connection.close();
+              res.statusMessage = "Création de l'issue réussie";
+              return res.status(201).end();
+            }
+          });
         }
       });
     }
@@ -50,7 +59,7 @@ route.post("/", function (req, res) {
 });
 
 route.put("/", function (req, res) {
-  mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology:true}, function (err){
+  return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology:true}, function (err){
     if (err)
       return res.status(500).json({message: errorConnect});
     else {
