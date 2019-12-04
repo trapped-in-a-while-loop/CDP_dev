@@ -49,4 +49,39 @@ route.post("/", function (req, res) {
   });
 });
 
+route.put("/", function (req, res) {
+  mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology:true}, function (err){
+    if (err)
+      return res.status(500).json({message: errorConnect});
+    else {
+      issue.issueModel.findOne({_idprojet:req.body.idprojet}, function(err, doc) {
+        if (err) {
+          mongoose.connection.close();
+          res.statusMessage = "Echec vérification id projet";
+          return res.status(500).end();
+        }else {
+          const role = req.body.role;
+          const action = req.body.action;
+          const raison = req.body.raison;
+          issue.issueModel.update({_idprojet:req.body.idprojet},
+            {
+              Role : role,
+              Action : action,
+              Raison : raison
+            }, function(err, result) {
+              if (err) {
+                mongoose.connection.close();
+                res.statusMessage = "Echec de la mise à jour de l'issue";
+                return res.status(500).end();
+              }else {
+                mongoose.connection.close();
+                return res.status(200).end();
+              }
+            });
+        }
+      });
+    }
+  });
+});
+
 module.exports = route;
