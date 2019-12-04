@@ -18,8 +18,7 @@ module.exports = {
     "quotes": ["warn", "double"],
     "no-var": "warn",
     "eqeqeq": ["warn", "always"],
-    "curly": ["warn", "always"],
-    "default-case": ["warn", "always"],
+    "default-case": "warn",
     "no-multi-spaces": "warn"
   }
 };
