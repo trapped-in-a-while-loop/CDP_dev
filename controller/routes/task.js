@@ -49,4 +49,61 @@ route.post("/", function (req, res) {
   });
 });
 
+route.put("/", function (req, res) {
+  return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology:true}, function (err) {
+    if (err) {
+      res.statusMessage = errorConnect;
+      return res.status(500).end();
+    }else {
+      task.taskModel.findOne({_idprojet:req.body.idprojet}, function (err, doc) {
+        if (err) {
+          mongoose.connection.close();
+          res.statusMessage = "Echec vérification id projet";
+          return res.status(500).end();
+        }else {
+          const titre = req.body.titre;
+          const description = req.body.description;
+          const statut = req.body.statut;
+          task.taskModel.update({_idprojet:req.body.idprojet},
+            {
+              Titre : titre,
+              Description : description,
+              Statut : statut
+            }, function (err, result) {
+              if (err) {
+                mongoose.connection.close();
+                res.statusMessage = "Echec de la mise à jour de la tâche";
+                return res.status(500).end();
+              }else {
+                mongoose.connection.close();
+                return res.status(200).end();
+              }
+            });
+        }
+      });
+    }
+  });
+});
+
+route.delete("/", function (req, res) {
+  return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology:true}, function (err) {
+    if (err)
+      return res.status(500).json({message: errorConnect});
+    else {
+      var idprojet = req.body.idprojet;
+      task.taskModel.findByIdAndRemove(idprojet, function (err) {
+        if (err) {
+          res.statusMessage = "Echec de la suppresion de la tâche";
+          mongoose.connection.close();
+          return res.status(500).end();
+        }else {
+          mongoose.connection.close();
+          res.statusMessage = "Suppression de la tâche réussie";
+          return res.status(200).end();
+        }
+      })
+    }
+  })
+})
+
 module.exports = route;
