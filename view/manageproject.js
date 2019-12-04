@@ -10,6 +10,7 @@ function readCookie(name) {
 }
 
 fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(function(res){
+    var cpt=0;
     res.json().then(function(res) {
         res[0]["Developpeurs"].forEach(dev => {
             var oneDev = document.createElement("p");
@@ -20,8 +21,10 @@ fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(function(res
             but.className = "btn btn-danger";
             but.href = "deletemember.html";
             but.innerHTML = "Supprimer";
+            but.id = "delDev_"+cpt;
             oneDev.appendChild(but);
             document.querySelector("#devs").appendChild(oneDev);
+            cpt++;
         });
         res[0]["Clients"].forEach(client => {
             var oneClient = document.createElement("p");
@@ -32,8 +35,23 @@ fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(function(res
             but.className = "btn btn-danger";
             but.href = "deletemember.html";
             but.innerHTML = "Supprimer";
+            but.id = "delClient_"+cpt;
             oneClient.appendChild(but);
             document.querySelector("#clients").appendChild(oneClient);
+            cpt++;
+        });
+        document.addEventListener('click', function(e){
+            if(e.target && e.target.id.split("_")[0].localeCompare("delDev")===0) {
+                const index = parseInt(e.target.id.split("_")[1], 10);
+                const login = res[0]["Developpeurs"][index];
+                document.cookie = "developpeur=" + login + "; path=./*";
+                document.location.href = "deletemember.html";
+            }else if(e.target && e.target.id.split("_")[0].localeCompare("delClient")===0) {
+                const index = parseInt(e.target.id.split("_")[1], 10);
+                const login = res[0]["Clients"][index];
+                document.cookie = "client=" + login + "; path=./*";
+                document.location.href = "deletemember.html";
+            }
         });
     });
 });
