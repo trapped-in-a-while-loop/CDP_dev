@@ -13,7 +13,7 @@ route.get("/", function(req, res) {
       res.statusMessage = errorConnect;
       return res.status(500).end();
     } else {
-      issue.issueModel.find({'IDProjet': req.query.idprojet}).lean().exec(function (err, docs) {
+      issue.issueModel.find({'Projet._id': mongoose.Types.ObjectId(req.query.id)}).lean().exec(function (err, docs) {
         if (err) {
           console.log(err);
           res.statusMessage = "Échec récupération issues";
@@ -34,7 +34,7 @@ route.post("/", function (req, res) {
       var role = req.body.role;
       var action = req.body.action;
       var raison = req.body.raison;
-      project.projectModel.findOne({_id:id}, function(err, doc){
+      project.projectModel.findOne({_id:idprojet}, function(err, doc){
         if(err){
           res.statusMessage = "Erreur de récupération du projet";
           mongoose.connection.close();
@@ -43,6 +43,7 @@ route.post("/", function (req, res) {
           var newIssue = new issue.issueModel({Projet: doc, Role: role, Action: action, Raison: raison});
           newIssue.save(function (err) {
             if (err) {
+              console.log(err);
               res.statusMessage = "Échec de la création de l'issue";
               mongoose.connection.close();
               return res.status(500).end();

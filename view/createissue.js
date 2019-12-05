@@ -19,9 +19,9 @@ function onClick()
   my_headers.append("Content-Type", "application/json");
 
   const id = readCookie("id");
-  const role = document.getElementById('role');
-  const action = document.getElementById('action');
-  const raison = document.getElementById('raison');
+  const role = document.querySelector("#role").value;
+  const action = document.querySelector("#action").value;
+  const raison = document.querySelector("#raison").value;
 
   var params = {idprojet: id, role: role, action: action, raison: raison};
 
