@@ -68,7 +68,7 @@ fetch(url + "proprietaire?login=" + login)
                         }else if(e.target && e.target.id.split("_")[0].localeCompare("titre")===0){
                             const index = parseInt(e.target.id.split("_")[1], 10);
                             const id = data[index]["_id"];
-                            document.cookie = "id=" + id + ", path=./*";
+                            document.cookie = "id=" + id + "; path=./*";
                             document.location.href = "project.html";
                         }
                     });

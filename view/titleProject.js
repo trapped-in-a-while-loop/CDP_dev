@@ -19,7 +19,6 @@ fetch(url + "?id=" + id)
         if (res.status === 200) {
             res.json().then(function (datas) {
                 document.querySelector("#titre").innerHTML = datas[0]["Titre"];
-                document.querySelector("#description").innerHTML = datas[0]["Description"];
             });
         } else
             alert(res.statusText);

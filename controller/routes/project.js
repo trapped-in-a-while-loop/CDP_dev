@@ -69,6 +69,7 @@ route.get("/id", function(req, res){
         } else {
             project.projectModel.find({_id: req.query.id}).lean().exec(function (err, docs) {
                 if (err) {
+                    console.log(err);
                     res.statusMessage = "Echec récupération projet";
                     return res.status(500).end();
                 } else
