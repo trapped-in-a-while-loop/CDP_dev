@@ -6,7 +6,7 @@ Test2 : Connexion à un compte
         -> Je me connecte avec un login et un mdp valident : V
         -> Je me connecte avec un login et un mdp invalident : X
 
-Test3 : Changer mes informations
+Test3 : Changer mes informations 
         -> Je remplace mes valeurs par d'autres : V
         -> Je remplace mes valeurs par rien : X
 
