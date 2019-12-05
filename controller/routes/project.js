@@ -133,6 +133,66 @@ route.delete("/", function (req, res) {
     });
 });
 
+route.delete("/developpeur", function (req, res) {
+    return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+        if(err)
+            return res.status(500).json({message: errorConnect});
+        else{
+            var id = req.body.id;
+            project.projectModel.findOne({_id: id}, function(err, doc){
+                if(err){
+                    res.statusMessage = "Echec de la récupération du projet";
+                    mongoose.connection.close();
+                    return res.status(500).end();
+                }else{
+                    doc.Developpeurs.splice(doc.Developpeurs.indexOf(req.body.developpeur), 1);
+                    doc.save(function(err){
+                        if(err){
+                            res.statusMessage = "Echec de suppression du développeur";
+                            mongoose.connection.close();
+                            return res.status(500).end();
+                        }else{
+                            res.statusMessage = "Développeur supprimé";
+                            mongoose.connection.close();
+                            return res.status(200).end();
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
+route.delete("/client", function (req, res) {
+    return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+        if(err)
+            return res.status(500).json({message: errorConnect});
+        else{
+            var id = req.body.id;
+            project.projectModel.findOne({_id: id}, function(err, doc){
+                if(err){
+                    res.statusMessage = "Echec de la récupération du projet";
+                    mongoose.connection.close();
+                    return res.status(500).end();
+                }else{
+                    doc.Clients.splice(doc.Clients.indexOf(req.body.client), 1);
+                    doc.save(function(err){
+                        if(err){
+                            res.statusMessage = "Echec de suppression du client";
+                            mongoose.connection.close();
+                            return res.status(500).end();
+                        }else{
+                            res.statusMessage = "Client supprimé";
+                            mongoose.connection.close();
+                            return res.status(200).end();
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
 route.put("/", function (req, res) {
     return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err) {
