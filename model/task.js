@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
+var project = require('./project');
 
 var taskSchema = new mongoose.Schema({
-  IDProjet : {type: String, required: true},
+  Projet : {type: project.projectSchema, required: true},
   Titre : {type: String, required: true},
   Description : {type: String, required: true},
   Statut : {type: String, enum: ['todo', 'pending', 'done']}
