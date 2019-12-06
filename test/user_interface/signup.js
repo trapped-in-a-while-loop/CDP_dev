@@ -6,6 +6,7 @@ const user = require("../../model/user");
 const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
 
 function rdString(length) {
+   "use strict";
    let result = "";
    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
    for (let i = 0; i < length; i++) {
@@ -14,13 +15,13 @@ function rdString(length) {
    return result;
 }
 
-const url = "";
+const url_home = "https://cdp-ropert-dupland-tomas.000webhostapp.com/";
 const string = rdString((Math.random() * 8) + 1);
 
-const test_signup = async() => {
+const test_signup = async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(url);
+    await page.goto(url_home);
     await page.waitFor("body");
 
     await page.evaluate(() => {
@@ -34,7 +35,7 @@ const test_signup = async() => {
 
     await page.click("#signup");
     await page.waitForNavigation();
-    const nextPage = await page.url();
+    const url_nextPage = await page.url();
 
     mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err) {
@@ -46,7 +47,7 @@ const test_signup = async() => {
                 }else{
                     assert((doc.length === 1) && (doc.Nom === string) && (doc.Prenom === string) &&
                     (doc.Mail === string + "@" + string) && (doc.Societe === string) && (doc.Login === string) &&
-                    (doc.Password === string) && (nextPage === "/index.html"));
+                    (doc.Password === string) && (url_nextPage === url_home));
                     mongoose.connection.close();
                 }
             });
