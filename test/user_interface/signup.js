@@ -6,7 +6,6 @@ const user = require("../../model/user");
 const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
 
 function rdString(length) {
-   "use strict";
    let result = "";
    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
    for (let i = 0; i < length; i++) {
@@ -21,23 +20,30 @@ const string = rdString((Math.random() * 8) + 1);
 const test_signup = async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
+    page.on('dialog', async dialog => {
+        await dialog.dismiss();
+    });
     await page.goto(url_home);
+    await page.waitFor("#inscription");
+    await page.click("#inscription");
+
     await page.waitFor("body");
 
-    await page.evaluate(() => {
-        document.querySelector("#nom").value = string;
-        document.querySelector("#prenom").value = string;
-        document.querySelector("#mail").value = string + "@" + string;
-        document.querySelector("#login").value = string;
-        document.querySelector("#password").value = string;
-        document.querySelector("#societe").value = string;
-    });
-
+    await page.type("#nom", string);
+    await page.type("#prenom", string);
+    await page.type("#mail", string + "@" + string);
+    await page.type("#login", string);
+    await page.type("#password", string);
+    await page.type("#societe", string);
+    
+    await page.waitFor("#signup");
     await page.click("#signup");
     await page.waitForNavigation();
+    await page.keyboard.press("n");
     const url_nextPage = await page.url();
 
-    mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
+    await browser.close();
+    await mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
         if(err) {
             mongoose.connection.close();
         }else{
@@ -45,16 +51,20 @@ const test_signup = async () => {
                 if(err) {
                     mongoose.connection.close();
                 }else{
-                    assert((doc.length === 1) && (doc.Nom === string) && (doc.Prenom === string) &&
-                    (doc.Mail === string + "@" + string) && (doc.Societe === string) && (doc.Login === string) &&
-                    (doc.Password === string) && (url_nextPage === url_home));
+                    assert(doc.length === 1);
+                    assert(doc[0].Nom === string);
+                    assert(doc[0].Prenom === string);
+                    assert(doc[0].Mail === string + "@" + string);
+                    assert(doc[0].Societe === string);
+                    assert(doc[0].Login === string);
+                    assert(doc[0].Password === string);
+                    assert(url_nextPage === url_home + "index.html");
+                    console.log("Test sign up passed");
                     mongoose.connection.close();
                 }
             });
         }
     });
-
-    await browser.close();
 };
 
 test_signup();
