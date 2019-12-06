@@ -30,11 +30,11 @@ route.post("/", function (req, res) {
     if (err)
       return res.status(500).json({message: errorConnect});
     else {
-      var idprojet = req.body.idprojet;
+      var id = req.body.id;
       var role = req.body.role;
       var action = req.body.action;
       var raison = req.body.raison;
-      project.projectModel.findOne({_id:idprojet}, function(err, doc){
+      project.projectModel.findOne({_id:id}, function(err, doc){
         if(err){
           res.statusMessage = "Erreur de récupération du projet";
           mongoose.connection.close();
@@ -64,7 +64,7 @@ route.put("/", function (req, res) {
     if (err)
       return res.status(500).json({message: errorConnect});
     else {
-      issue.issueModel.findOne({_idprojet:req.body.idprojet}, function(err, doc) {
+      issue.issueModel.findOne({_id:req.body.id}, function(err, doc) {
         if (err) {
           mongoose.connection.close();
           res.statusMessage = "Echec vérification id projet";
@@ -73,7 +73,7 @@ route.put("/", function (req, res) {
           const role = req.body.role;
           const action = req.body.action;
           const raison = req.body.raison;
-          issue.issueModel.update({_idprojet:req.body.idprojet},
+          issue.issueModel.update({_id:req.body.id},
             {
               Role : role,
               Action : action,

@@ -23,7 +23,7 @@ function onClick()
   const action = document.querySelector("#action").value;
   const raison = document.querySelector("#raison").value;
 
-  var params = {idprojet: id, role: role, action: action, raison: raison};
+  var params = {id: id, role: role, action: action, raison: raison};
 
   var my_init = {
     method: 'POST',

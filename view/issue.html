@@ -17,7 +17,8 @@
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script type="application/javascript" src="issue.js"></script>
+    <script type="application/javascript" src="issue.js" defer></script>
+    <script type="application/javascript" src="titleProject.js" defer></script>
 </head>
 
 <body class="container">
@@ -26,7 +27,7 @@
 
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Projet 1</h1>
+            <h1 id="titre" class="jumbotron-heading"></h1>
         </div>
     </section>
 
@@ -44,30 +45,6 @@
         <div class="col-sm-8">
             <a class="btn btn-success btn-sm ml-3" href="createissue.html">Créer une issue</a>
             <div id="issues">
-                <!--<br>
-                <div class="row">
-                    <div class="col-sm-8">
-                        <b>En tant que</b> développeur<br>
-                        <b>Je souhaite</b> avoir accès aux utilisateurs<br>
-                        <b>Afin de</b> pouvoir les gérer
-                    </div>
-                    <div class="col-sm-4">
-                        <a type="button" class="btn btn-danger" href="">Supprimer</a>
-                        <a type="button" class="btn btn-primary" href="">Éditer</a>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-sm-8">
-                        <b>En tant que</b> client<br>
-                        <b>Je souhaite</b> avoir accès à un projet<br>
-                        <b>Afin de</b> pouvoir voir l'avancée de mon projet<br>
-                    </div>
-                    <div class="col-sm-4">
-                        <a class="btn btn-danger" href="">Supprimer</a>
-                        <a class="btn btn-primary" href="">Éditer</a>
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>

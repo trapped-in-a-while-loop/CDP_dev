@@ -5,7 +5,7 @@ function readCookie(name) {
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c, length);
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
         if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
@@ -17,12 +17,12 @@ function onClick() {
     const my_headers = new Headers();
     my_headers.append("Content-type", "application/json");
 
-    const idprojet = readCookie("projet");
-    const testgiven = document.getElementById('given');
-    const testwhen = document.getElementById('when');
-    const testthen = document.getElementById('then');
+    const id = readCookie("id");
+    const testGiven = document.getElementById('given').value;
+    const testWhen = document.getElementById('when').value;
+    const testThen = document.getElementById('then').value;
 
-    var params = {idprojet: idprojet, testgiven: testgiven, testwhen: testwhen, testthen: testthen};
+    var params = {id: id, testGiven: testGiven, testWhen: testWhen, testThen: testThen};
 
     var my_init = {
         method: 'POST',

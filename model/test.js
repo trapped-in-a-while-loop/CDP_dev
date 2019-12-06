@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
+var project = require('./project');
 
 var testSchema = new mongoose.Schema({
-    IDProjet : {type: String, required: true},
-    testGiven : {type: String, required: true},
-    testWhen : {type: String, required: true},
-    testThen : {type: String, required: true}
+    Projet : {type: project.projectSchema, required: true},
+    TestGiven : {type: String, required: true},
+    TestWhen : {type: String, required: true},
+    TestThen : {type: String, required: true}
 });
 var testModel = mongoose.model('test', testSchema, 'test');
 
