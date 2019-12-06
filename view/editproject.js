@@ -30,7 +30,7 @@ fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(function (re
 function onClickOk() {
     if (document.cookie.includes("id=")) {
 
-        const url = 'http://localhost:3000/project';
+        const url = backUrl+'project';
         const my_headers = new Headers();
         my_headers.append("Content-Type", "application/json");
 

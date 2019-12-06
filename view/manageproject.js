@@ -62,7 +62,7 @@ document.querySelector("#saveClient").addEventListener("click", onClickClient);
 
 function onClickDeveloppeur() {
     if (document.cookie.includes("id=")){
-        const url = 'http://localhost:3000/project/developpeur';
+        const url = backUrl+'project/developpeur';
         const my_headers = new Headers();
         my_headers.append("Content-Type", "application/json");
 
@@ -96,7 +96,7 @@ function onClickDeveloppeur() {
 function onClickClient() {
     if (document.cookie.includes("id=")) {
 
-        const url = 'http://localhost:3000/project/client';
+        const url = backUrl+'project/client';
         const my_headers = new Headers();
         my_headers.append("Content-Type", "application/json");
 

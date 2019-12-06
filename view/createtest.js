@@ -12,7 +12,7 @@ function readCookie(name) {
 }
 
 function onClick() {
-    const url = 'http://localhost:3000/test';
+    const url = backUrl+'test';
 
     const my_headers = new Headers();
     my_headers.append("Content-type", "application/json");

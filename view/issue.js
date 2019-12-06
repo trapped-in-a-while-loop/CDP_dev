@@ -9,7 +9,7 @@ function readCookie(name) {
     return null;
 }
 
-const url = 'http://localhost:3000/issue?id=';
+const url = backUrl+'issue?id=';
 
 const id = readCookie("id");
 

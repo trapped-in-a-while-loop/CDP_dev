@@ -9,7 +9,7 @@ function readCookie(name) {
     return null;
 }
 
-const url = 'http://localhost:3000/user';
+const url = backUrl+'user';
 
 const login = readCookie("login");
 const mdp = readCookie("mdp");
@@ -36,7 +36,7 @@ document.querySelector("#save").addEventListener('click', onClick);
 
 function onClick()
 {
-    const url = 'http://localhost:3000/user';
+    const url = backUrl+'user';
 
     const my_headers = new Headers();
     my_headers.append("Content-Type", "application/json");
