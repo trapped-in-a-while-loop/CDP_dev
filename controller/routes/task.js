@@ -2,17 +2,18 @@ let express = require('express');
 let route = express.Router();
 var mongoose = require('mongoose');
 var task = require('../../model/task');
+var project = require('../../model/project');
 
 const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
 const errorConnect = "Connexion BDD impossible";
 
 route.get("/", function (req, res) {
-  mongoose.connect(stringConnect, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+  return mongoose.connect(stringConnect, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
     if (err) {
       res.statusMessage = errorConnect;
       return res.status(500).end();
     } else {
-      task.taskModel.find({'IDProjet': req.query.idprojet}).lean().exec(function (err, docs){
+      task.taskModel.find({'Projet._id': mongoose.Types.ObjectId(req.query.id)}).lean().exec(function (err, docs){
         if (err) {
           console.log(err);
           res.statusMessage = "Échec récupération tâches";
@@ -25,24 +26,32 @@ route.get("/", function (req, res) {
 });
 
 route.post("/", function (req, res) {
-  mongoose.connect(stringConnect, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+  return mongoose.connect(stringConnect, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
     if (err)
       return res.status(500).json({ message: errorConnect });
     else {
-      var idprojet = req.body.idprojet;
+      var id = req.body.id;
       var titre = req.body.titre;
       var description = req.body.description;
       var statut = req.body.statut;
-      var task = new task.taskModel({ IDProjet: idprojet, Titre: titre, Description: description, Statut: statut });
-      task.save(function (err) {
-        if (err) {
-          res.statusMessage = "Échec de la création de la tâche";
+      project.projectModel.findOne({_id:id}, function(err, doc){
+        if(err){
+          res.statusMessage = "Erreur de récupération du projet";
           mongoose.connection.close();
           return res.status(500).end();
-        } else {
-          mongoose.connection.close();
-          res.statusMessage = "Création de la tâche réussie";
-          return res.status(201).end();
+        }else{
+          var newTask = new task.taskModel({ Projet: doc, Titre: titre, Description: description, Statut: statut });
+          newTask.save(function (err) {
+            if (err) {
+              res.statusMessage = "Échec de la création de la tâche";
+              mongoose.connection.close();
+              return res.status(500).end();
+            } else {
+              mongoose.connection.close();
+              res.statusMessage = "Création de la tâche réussie";
+              return res.status(201).end();
+            }
+          });
         }
       });
     }
@@ -55,7 +64,7 @@ route.put("/", function (req, res) {
       res.statusMessage = errorConnect;
       return res.status(500).end();
     }else {
-      task.taskModel.findOne({_idprojet:req.body.idprojet}, function (err, doc) {
+      task.taskModel.findOne({_id:req.body.id}, function (err, doc) {
         if (err) {
           mongoose.connection.close();
           res.statusMessage = "Echec vérification id projet";
@@ -64,7 +73,7 @@ route.put("/", function (req, res) {
           const titre = req.body.titre;
           const description = req.body.description;
           const statut = req.body.statut;
-          task.taskModel.update({_idprojet:req.body.idprojet},
+          task.taskModel.update({_id:req.body.id},
             {
               Titre : titre,
               Description : description,
@@ -90,8 +99,8 @@ route.delete("/", function (req, res) {
     if (err)
       return res.status(500).json({message: errorConnect});
     else {
-      var idprojet = req.body.idprojet;
-      task.taskModel.findByIdAndRemove(idprojet, function (err) {
+      var id = req.body.id;
+      task.taskModel.findByIdAndRemove(id, function (err) {
         if (err) {
           res.statusMessage = "Echec de la suppresion de la tâche";
           mongoose.connection.close();
