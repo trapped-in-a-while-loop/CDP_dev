@@ -26,7 +26,7 @@ route.get("/", function (req, res) {
 });
 
 route.post("/", function (req, res) {
-    return mongoose.connect("mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+    return mongoose.connect(stringConnect, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
         if (err)
             return res.status(500).json({ message: errorConnect });
         else {

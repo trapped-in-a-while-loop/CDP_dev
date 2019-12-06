@@ -17,38 +17,12 @@
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="task.js" defer></script>
 </head>
 
 <body class="container">
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-
-        <div class="container">
-            <a class="btn btn-dark" href="index.html">
-                Accueil
-            </a>
-
-            <div class="container">
-                <div class="dropdown">
-                    <button class="btn btn-success btn-sm ml-3 dropdown-toggle" id="menu1" type="button"
-                        data-toggle="dropdown">Mon compte
-                        <span class="caret"></span></button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="myaccount.html">Mon profil</a>
-                        </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="myprojects.html">Mes projets</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-                <form class="form-inline my-2 my-lg-0">
-                    <a class="btn btn-success btn-sm ml-3" href="home.html">Déconnexion</a>
-                </form>
-            </div>
-        </div>
-    </nav>
+    <script type="application/javascript" src="banner.js" defer></script>
 
     <section class="jumbotron text-center">
         <div class="container">
@@ -69,48 +43,7 @@
 
         <div class="col-sm-8">
             <a class="btn btn-success btn-sm ml-3" href="createtask.html">Créer une tâche</a>
-            <p></br>
-                <b>Titre de la tâche</b></br>
-                <div class="row">
-                    <div class="col-sm-4">
-                        Description de la tâche
-                    </div>
-                    <div class="col-sm-4">
-                        <p style="color:rgb(255,0,0);">To do</p>
-                    </div>
-                    <div class="col-sm-4">
-                        <a class="btn btn-danger" href="">Supprimer</a>
-                        <a class="btn btn-primary" href="">Éditer</a>
-                    </div>
-                </div>
-                </br>
-                <b>Titre de la deuxième tâche</b></br>
-                <div class="row">
-                    <div class="col-sm-4">
-                        Description de la deuxième tâche
-                    </div>
-                    <div class="col-sm-4">
-                        <p style="color:rgb(0,255,0);">Done</p>
-                    </div>
-                    <div class="col-sm-4">
-                        <a class="btn btn-danger" href="">Supprimer</a>
-                        <a class="btn btn-primary" href="">Éditer</a>
-                    </div>
-                </div>
-                </br>
-                <b>Titre de la troisième tâche</b></br>
-                <div class="row">
-                    <div class="col-sm-4">
-                        Description de la troisième tâche
-                    </div>
-                    <div class="col-sm-4">
-                        Pending
-                    </div>
-                    <div class="col-sm-4">
-                        <a class="btn btn-danger" href="">Supprimer</a>
-                        <a class="btn btn-primary" href="">Éditer</a>
-                    </div>
-                </div>
-            </p>
+            <div id="tasks">
+            </div>
         </div>
     </div>
