@@ -72,6 +72,14 @@ fetch(url + id)
                     row.append(col41, col42, col43);
 
                     document.querySelector("#tasks").append(br1, titre, br2, row);
+
+                    elem["Projet"]["Clients"].forEach(client => {
+                        if(client.Login === readCookie("login")) {
+                            document.querySelector("#create").remove();
+                            del.remove();
+                            edit.remove();
+                        }
+                    });
                 });
             });
         } else

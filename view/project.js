@@ -13,7 +13,6 @@ const url = backUrl+'project/id';
 
 const id = readCookie("id");
 
-//Owned projects
 fetch(url + "?id=" + id)
     .then(function (res) {
         if (res.status === 200) {
