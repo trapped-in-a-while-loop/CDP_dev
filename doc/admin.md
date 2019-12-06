@@ -27,4 +27,4 @@ L'administrateur peut lancer les tests de validation et unitaires
 en utilisant la commande suivante:</br>
 
 
-Si tous les tests passent, cela signifie que l'installation s'est bien déroulé.
+Si tous les tests passent, cela signifie que l'installation s'est bien déroulée.
