@@ -9,12 +9,12 @@ function readCookie(name) {
     return null;
 }
 
-const url = backUrl+'project/id';
+const urlTitre = backUrl+'project/id';
 
-const id = readCookie("id");
+const idTitre = readCookie("id");
 
 //Owned projects
-fetch(url + "?id=" + id)
+fetch(urlTitre + "?id=" + idTitre)
     .then(function (res) {
         if (res.status === 200) {
             res.json().then(function (datas) {

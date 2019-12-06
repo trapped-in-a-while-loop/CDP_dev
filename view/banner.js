@@ -32,20 +32,11 @@ if(document.cookie.includes("login=")){
         "\n" +
         "\n" +
         "                <form class=\"form-inline my-2 my-lg-0\">\n" +
-        "                    <!--<div class=\"input-group input-group-sm\">\n" +
-        "                        <input type=\"text\" class=\"form-control\" aria-label=\"Small\" aria-describedby=\"inputGroup-sizing-sm\"\n" +
-        "                            placeholder=\"Rechercher...\">\n" +
-        "                        <div class=\"input-group-append\">\n" +
-        "                            <button type=\"button\" class=\"btn btn-secondary btn-number\">\n" +
-        "                                <i class=\"fa fa-search\"></i>\n" +
-        "                            </button>\n" +
-        "                        </div>\n" +
-        "                    </div>-->\n" +
         "\n" +
-        "                    <a class=\"btn btn-success btn-sm ml-3\" href=\"signup.html\">\n" +
+        "                    <a id=\"inscription\" class=\"btn btn-success btn-sm ml-3\" href=\"signup.html\">\n" +
         "                        <i class=\"fa fa-pencil\"></i> Inscription\n" +
         "                    </a>\n" +
-        "                    <a class=\"btn btn-success btn-sm ml-3\" href=\"login.html\">\n" +
+        "                    <a id=\"connexion\"class=\"btn btn-success btn-sm ml-3\" href=\"login.html\">\n" +
         "                        <i class=\"fa fa-lock\"></i> Connexion\n" +
         "                    </a>\n" +
         "                </form>\n" +
