@@ -1,14 +1,25 @@
 <h2>Release 2.0 du 06/12/2019</h2>
 
+<h3>Déploiement avec Heroku:</h3>
+
+Après avoir ouvert son navigateur, l'utilisateur a juste à se connecter à l'adresse suivante:
+https://cdp-ropert-dupland-tomas.000webhostapp.com
+
+<h3>Déploiement avec Docker:</h3>
+
 Après avoir téléchargé la release, l'utilisateur doit se placer dans la racine du projet (plus specifiquement là où se trouve le fichier *docker-compose.yml*).
 Celui-ci lance ensuite la commande suivante dans son terminal:</br>
-*docker-compose up*
+*docker-compose up --build*
 
 Ensuite l'utilisateur n'a plus qu'à rentrer la commande suivante pour se connecter à la page d'accueil du projet:</br>
 *firefox ./front/index.html*
 
-Pour lancer les tests l'utilisateur doit rentrer les commandes suivantes:
+<h3>Tests</h3>
 
+Pour lancer les tests, l'utilisateur doit rentrer les commandes suivantes:
+
+
+<h3>Issues</h3>
 
 Les issues réalisées pour cette release sont les suivantes:
 
