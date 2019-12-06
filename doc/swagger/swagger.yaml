@@ -360,41 +360,6 @@ paths:
           description: |-
             Connexion à la base de données impossible
             Échec de la création de l'issue
-    put:
-      tags:
-      - Issue
-      summary: Modification d'une issue
-      description: On modifie une issue
-      parameters:
-      - name: IDProjet
-        in: query
-        description: Id du projet
-        required: true
-        type: string
-      - name: Role
-        in: query
-        description: Nouveau role de l'issue
-        required: false
-        type: string
-      - name: Action
-        in: query
-        description: Nouvelle action de l'issue
-        required: false
-        type: string
-      - name: Raison
-        in: query
-        description: Nouvelle raison de l'issue
-        required: false
-        type: string
-      responses:
-        "201":
-          description: Modification de l'issue réussie
-          schema:
-            $ref: '#/definitions/Issue'
-        "500":
-          description: |-
-            Connexion à la base de données impossible
-            Échec de la modification de l'issue
   /task:
     get:
       tags:
@@ -448,40 +413,6 @@ paths:
           description: |-
             Connexion à la base de données impossible
             Échec de la création de la tâche
-    put:
-      tags:
-      - Task
-      summary: Modification d'une tâche
-      description: On modifie une tâche
-      parameters:
-      - name: IDProjet
-        in: query
-        description: Id du projet
-        required: true
-        type: string
-      - name: Titre
-        in: query
-        description: Nouveau titre de la tâche
-        required: false
-        type: string
-      - name: Statut
-        in: query
-        description: Nouvel état de la tâche
-        required: false
-        type: string
-        enum:
-        - todo
-        - pending
-        - done
-      responses:
-        "201":
-          description: Modification de la tâche réussie
-          schema:
-            $ref: '#/definitions/Task'
-        "500":
-          description: |-
-            Connexion à la base de données impossible
-            Échec de la modification de la tâche
   /test:
     get:
       tags:
@@ -536,41 +467,6 @@ paths:
           description: |-
             Connexion à la base de données impossible
             Échec de la création d'un test
-    put:
-      tags:
-      - Test
-      summary: Modification d'un test
-      description: On modifie un test
-      parameters:
-      - name: IDProjet
-        in: query
-        description: Id du projet
-        required: true
-        type: string
-      - name: Given
-        in: query
-        description: Nouvelle initialisation du test
-        required: false
-        type: string
-      - name: When
-        in: query
-        description: Nouvel élément qui déclenche un évènement
-        required: false
-        type: string
-      - name: Then
-        in: query
-        description: Nouvel effet de l'évènement
-        required: false
-        type: string
-      responses:
-        "200":
-          description: Modification d'un test réussie
-          schema:
-            $ref: '#/definitions/Test'
-        "500":
-          description: |-
-            Connexion à la base de données impossible
-            Échec de la modification d'un test
 definitions:
   User:
     type: object
@@ -623,13 +519,12 @@ definitions:
     type: object
     required:
     - Action
-    - IDProjet
+    - Projet
     - Raison
     - Role
     properties:
-      IDProjet:
-        type: string
-        example: '#1'
+      Projet:
+        $ref: '#/definitions/Issue_Projet'
       Role:
         type: string
         example: développeur
@@ -643,13 +538,12 @@ definitions:
     type: object
     required:
     - Description
-    - IDProjet
+    - Projet
     - Statut
     - Titre
     properties:
-      IDProjet:
-        type: string
-        example: '#1'
+      Projet:
+        $ref: '#/definitions/Issue_Projet'
       Titre:
         type: string
         example: Titre de la tâche 1
@@ -666,14 +560,13 @@ definitions:
   Test:
     type: object
     required:
-    - IDProjet
+    - Projet
     - testGiven
     - testThen
     - testWhen
     properties:
-      IDProjet:
-        type: string
-        example: '#1'
+      Projet:
+        $ref: '#/definitions/Issue_Projet'
       testGiven:
         type: string
         example: Je crée un projet
@@ -763,3 +656,24 @@ definitions:
       Password:
         type: string
         example: bmartin
+  Issue_Projet:
+    type: object
+    required:
+    - Clients
+    - Description
+    - Developpeurs
+    - Proprietaire
+    - Titre
+    properties:
+      Titre:
+        type: string
+        example: Titre du projet
+      Description:
+        type: string
+        example: Voici la description du projet
+      Proprietaire:
+        $ref: '#/definitions/Project_Proprietaire'
+      Developpeurs:
+        $ref: '#/definitions/Project_Developpeurs'
+      Clients:
+        $ref: '#/definitions/Project_Clients'
