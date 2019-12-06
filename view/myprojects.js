@@ -98,6 +98,7 @@ function displayNoOwnerProjects(addr, role) {
                         titre.setAttribute("class", "btn btn-link");
                         titre.innerHTML = item["Titre"] + " (" + role + ")\n";
                         document.querySelector("#projects").append(titre);
+                        document.querySelector("#projects").append(document.createElement("br"));
                         cpt++;
                     });
                 });
