@@ -35,7 +35,7 @@ const test_signup = async () => {
     await page.type("#login", string);
     await page.type("#password", string);
     await page.type("#societe", string);
-    
+
     await page.waitFor("#signup");
     await page.click("#signup");
     await page.waitForNavigation();
