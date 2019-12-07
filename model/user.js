@@ -1,7 +1,6 @@
-let express = require('express');
-var mongoose = require('mongoose');
+let mongoose = require("mongoose");
 
-var userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     Nom : { type: String, required: true},
     Prenom : { type: String, required: true},
     Mail : { type: String, required: true},
@@ -9,7 +8,7 @@ var userSchema = new mongoose.Schema({
     Login : { type: String, required: true, unique: true},
     Password : { type: String, required: true}
 });
-var userModel = mongoose.model('user', userSchema, 'user');
+let userModel = mongoose.model("user", userSchema, "user");
 
 exports.userModel = userModel;
 exports.userSchema = userSchema;

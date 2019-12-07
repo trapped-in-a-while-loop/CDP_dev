@@ -1,7 +1,7 @@
-let express = require('express');
+let express = require("express");
 let route = express.Router();
-var mongoose = require('mongoose');
-var user = require('../../model/user');
+let mongoose = require("mongoose");
+let user = require("../../model/user");
 
 const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
 const errorConnect = "Connexion BDD impossible";
@@ -55,7 +55,7 @@ route.post("/", function (req, res) {
                         const societe = req.body.societe;
                         const login = req.body.login;
                         const mdp = req.body.mdp;
-                        var newUser = new user.userModel(
+                        let newUser = new user.userModel(
                             {Nom : nom,
                                 Prenom : prenom,
                                 Mail : mail,

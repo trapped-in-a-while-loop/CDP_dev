@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+let mongoose = require("mongoose");
 
-var customUserSchema = new mongoose.Schema({
+const customUserSchema = new mongoose.Schema({
     Nom : { type: String, required: true},
     Prenom : { type: String, required: true},
     Mail : { type: String, required: true},
@@ -9,14 +9,14 @@ var customUserSchema = new mongoose.Schema({
     Password : { type: String, required: true}
 });
 
-var projectSchema = new mongoose.Schema({
+const projectSchema = new mongoose.Schema({
     Titre : { type: String, required: true},
     Description : { type: String},
     Proprietaire : { type: customUserSchema, required: true},
     Developpeurs : {type: [customUserSchema]},
     Clients : {type: [customUserSchema]}
 });
-var projectModel = mongoose.model('project', projectSchema, 'project');
+let projectModel = mongoose.model("project", projectSchema, "project");
 
 exports.projectModel = projectModel;
 exports.projectSchema = projectSchema;

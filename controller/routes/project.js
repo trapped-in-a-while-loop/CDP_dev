@@ -1,8 +1,8 @@
-let express = require('express');
+let express = require("express");
 let route = express.Router();
-var mongoose = require('mongoose');
-var project = require('../../model/project');
-var user = require('../../model/user');
+let mongoose = require("mongoose");
+let project = require("../../model/project");
+let user = require("../../model/user");
 
 const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
 const errorConnect = "Connexion BDD impossible";
@@ -13,7 +13,7 @@ route.get("/proprietaire", function(req, res){
             res.statutMessage = errorConnect;
             return res.status(500).end();
         } else {
-            project.projectModel.find({'Proprietaire.Login': req.query.login}).lean().exec(function (err, docs) {
+            project.projectModel.find({"Proprietaire.Login": req.query.login}).lean().exec(function (err, docs) {
                 if (err) {
                     console.log(err);
                     res.statusMessage = "Echec récupération projets";
@@ -31,7 +31,7 @@ route.get("/developpeur", function(req, res){
             res.statutMessage = errorConnect;
             return res.status(500).end();
         } else {
-            project.projectModel.find({'Developpeurs.Login': req.query.login}).lean().exec(function (err, docs) {
+            project.projectModel.find({"Developpeurs.Login": req.query.login}).lean().exec(function (err, docs) {
                 if (err) {
                     console.log(err);
                     res.statusMessage = "Echec récupération projets";
@@ -49,7 +49,7 @@ route.get("/client", function(req, res){
             res.statutMessage = errorConnect;
             return res.status(500).end();
         } else {
-            project.projectModel.find({'Clients.Login': req.query.login}).lean().exec(function (err, docs) {
+            project.projectModel.find({"Clients.Login": req.query.login}).lean().exec(function (err, docs) {
                 if (err) {
                     console.log(err);
                     res.statusMessage = "Echec récupération projets";
@@ -84,16 +84,16 @@ route.post("/", function (req, res) {
         if(err)
             return res.status(500).json({message: errorConnect});
         else{
-            var login = req.body.login;
+            const login = req.body.login;
             user.userModel.findOne({Login: login}).lean().exec(function(err, docs){
                 if(err){
                     res.statusMessage = "Echec récupération infos proprietaire";
                     return res.status(500).end();
                 }else{
-                    var proprietaire = new user.userModel(docs);
-                    var titre = req.body.titre;
-                    var description = req.body.description;
-                    var newProject = new project.projectModel({Titre:titre, Description:description, Proprietaire:login});
+                    const proprietaire = new user.userModel(docs);
+                    const titre = req.body.titre;
+                    const description = req.body.description;
+                    let newProject = new project.projectModel({Titre:titre, Description:description, Proprietaire:login});
                     newProject.Proprietaire = proprietaire;
                     newProject.save(function(err){
                         if(err){
@@ -118,7 +118,7 @@ route.delete("/", function (req, res) {
         if(err)
             return res.status(500).json({message: errorConnect});
         else{
-            var id = req.body.id;
+            const id = req.body.id;
             project.projectModel.findByIdAndRemove(id, function(err){
                 if(err){
                     res.statusMessage = "Echec de la suppression du projet";
@@ -139,7 +139,7 @@ route.delete("/developpeur", function (req, res) {
         if(err)
             return res.status(500).json({message: errorConnect});
         else{
-            var id = req.body.id;
+            const id = req.body.id;
             project.projectModel.findOne({_id: id}, function(err, doc){
                 if(err){
                     res.statusMessage = "Echec de la récupération du projet";
@@ -169,7 +169,7 @@ route.delete("/client", function (req, res) {
         if(err)
             return res.status(500).json({message: errorConnect});
         else{
-            var id = req.body.id;
+            const id = req.body.id;
             project.projectModel.findOne({_id: id}, function(err, doc){
                 if(err){
                     res.statusMessage = "Echec de la récupération du projet";

@@ -1,8 +1,8 @@
-let express = require('express');
+let express = require("express");
 let route = express.Router();
-var mongoose = require('mongoose');
-var issue = require('../../model/issue');
-var project = require('../../model/project');
+let mongoose = require("mongoose");
+let issue = require("../../model/issue");
+let project = require("../../model/project");
 
 const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
 const errorConnect = "Connexion BDD impossible";
@@ -13,7 +13,7 @@ route.get("/", function(req, res) {
       res.statusMessage = errorConnect;
       return res.status(500).end();
     } else {
-      issue.issueModel.find({'Projet._id': mongoose.Types.ObjectId(req.query.id)}).lean().exec(function (err, docs) {
+      issue.issueModel.find({"Projet._id": mongoose.Types.ObjectId(req.query.id)}).lean().exec(function (err, docs) {
         if (err) {
           console.log(err);
           res.statusMessage = "Échec récupération issues";
@@ -30,17 +30,17 @@ route.post("/", function (req, res) {
     if (err)
       return res.status(500).json({message: errorConnect});
     else {
-      var id = req.body.id;
-      var role = req.body.role;
-      var action = req.body.action;
-      var raison = req.body.raison;
+      const id = req.body.id;
+      const role = req.body.role;
+      const action = req.body.action;
+      const raison = req.body.raison;
       project.projectModel.findOne({_id:id}, function(err, doc){
         if(err){
           res.statusMessage = "Erreur de récupération du projet";
           mongoose.connection.close();
           return res.status(500).end();
         }else{
-          var newIssue = new issue.issueModel({Projet: doc, Role: role, Action: action, Raison: raison});
+          let newIssue = new issue.issueModel({Projet: doc, Role: role, Action: action, Raison: raison});
           newIssue.save(function (err) {
             if (err) {
               console.log(err);

@@ -1,8 +1,8 @@
-let express = require('express');
+let express = require("express");
 let route = express.Router();
-var mongoose = require('mongoose');
-var test = require('../../model/test');
-var project = require('../../model/project');
+let mongoose = require("mongoose");
+let test = require("../../model/test");
+let project = require("../../model/project");
 
 const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
 const errorConnect = "Connexion BDD impossible";
@@ -13,7 +13,7 @@ route.get("/", function (req, res) {
             res.statusMessage = errorConnect;
             return res.status(500).end();
         } else {
-            test.testModel.find({ 'Projet._id': mongoose.Types.ObjectId(req.query.id)}).lean().exec(function (err, docs) {
+            test.testModel.find({ "Projet._id": mongoose.Types.ObjectId(req.query.id)}).lean().exec(function (err, docs) {
                 if (err) {
                     console.log(err);
                     res.statusMessage = "Échec récupération tests";
@@ -30,17 +30,17 @@ route.post("/", function (req, res) {
         if (err)
             return res.status(500).json({ message: errorConnect });
         else {
-            var id = req.body.id;
-            var given = req.body.testGiven;
-            var when = req.body.testWhen;
-            var then = req.body.testThen;
+            const id = req.body.id;
+            const given = req.body.testGiven;
+            const when = req.body.testWhen;
+            const then = req.body.testThen;
             project.projectModel.findOne({_id:id}, function(err, doc){
                 if(err){
                     res.statusMessage = "Erreur de récupération du projet";
                     mongoose.connection.close();
                     return res.status(500).end();
                 }else{
-                    var newTest = new test.testModel({ Projet: doc, TestGiven: given, TestWhen: when, TestThen: then });
+                    let newTest = new test.testModel({ Projet: doc, TestGiven: given, TestWhen: when, TestThen: then });
                     newTest.save(function (err) {
                         if (err) {
                             res.statusMessage = "Échec de la création du test";
@@ -77,7 +77,7 @@ route.put("/", function (req, res) {
                         {
                             testGiven: testgiven,
                             testWhen: testwhen,
-                            testThen: testhen
+                            testThen: testthen
                         }, function (err, result) {
                             if (err) {
                                 mongoose.connection.close();
