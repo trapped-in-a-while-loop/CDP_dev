@@ -18,7 +18,7 @@ let data = [];
 
 //Owned projects
 fetch(url + "proprietaire?login=" + login)
-    .then(function (res) {
+    .then(async function (res) {
         if (res.status === 200) {
             res.json().then(function (datas) {
                 data = data.concat(datas);
@@ -79,14 +79,17 @@ fetch(url + "proprietaire?login=" + login)
                 });
             });
         } else
-            alert(res.statusText);
+            await Swal.fire({
+                icon: "error",
+                text: res.statusText
+            });
     }).catch(function (err) {
     console.log(err.message);
 });
 
 function displayNoOwnerProjects(addr, role) {
     fetch(addr)
-        .then(function (res) {
+        .then(async function (res) {
             if (res.status === 200) {
                 res.json().then(function (datas) {
                     data = data.concat(datas);
@@ -102,7 +105,10 @@ function displayNoOwnerProjects(addr, role) {
                     });
                 });
             } else
-                alert(res.statusText);
+                await Swal.fire({
+                    icon: "error",
+                    text: res.statusText
+                });
         }).catch(function (err) {
         console.log(err.message);
     });

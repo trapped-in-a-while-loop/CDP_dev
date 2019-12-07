@@ -32,14 +32,20 @@ function onClickOk() {
         };
 
         fetch(url, my_init)
-            .then(function (res) {
+            .then(async function (res) {
                 if (res.status === 200) {
-                    alert("Projet supprimé");
+                    await Swal.fire({
+                        icon: "success",
+                        text: "Projet supprimé"
+                    });
                     document.cookie = "id=no_id; expires=Fri, 01 Jan 2010 00:0:00 UTC; path=./*";
                     document.location.href = "myprojects.html";
                 }
                 else
-                    alert(res.statusText);
+                    await Swal.fire({
+                        icon: "error",
+                        text: res.statusText
+                    });
             }).catch(function (err) {
                 console.log(err.message);
             });

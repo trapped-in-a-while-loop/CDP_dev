@@ -15,7 +15,7 @@ const login = readCookie("login");
 const mdp = readCookie("mdp");
 
 fetch(url+"?login="+login+"&mdp="+mdp)
-    .then(function(res)
+    .then(async function(res)
     {
         if(res.status === 200) {
             res.json().then(function(data){
@@ -60,16 +60,25 @@ function onClick()
     };
 
     fetch(url, my_init)
-        .then(function(res)
+        .then(async function(res)
         {
             if(res.status === 409)
-                alert("Ce login est déjà utilisé, veuillez en choisir un autre");
+                await Swal.fire({
+                    icon: "error",
+                    text: "Ce login est déjà utilisé, veuillez en choisir un autre"
+                });
             else if(res.status === 200) {
-                alert("Mise à jour réussie !");
+                await Swal.fire({
+                    icon: "success",
+                    text: "Mise à jour réussie !"
+                });
                 document.location.href = "index.html";
             }
             else
-                alert(res.statusText);
+                await Swal.fire({
+                    icon: "error",
+                    text: res.statusText
+                });
         }).catch(function(err){
         console.log(err.message);
     });

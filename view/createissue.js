@@ -34,13 +34,19 @@ function onClick()
   };
 
   fetch(url, my_init)
-    .then(function(res) 
+    .then(async function(res)
     {
       if (res.status === 201) {
-        alert("Issue créée !");
+        await Swal.fire({
+          icon: "success",
+          text: "Issue créée !"
+        });
         document.location.href = "issue.html";
-      }else 
-        alert(res.statusText);
+      }else
+        await Swal.fire({
+          icon: "error",
+          text: res.statusText
+        });
     }).catch(function (err) {
       console.log(err.message);
     });

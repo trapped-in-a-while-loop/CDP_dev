@@ -33,13 +33,19 @@ function onClick()
     };
 
     fetch(url, my_init)
-        .then(function(res)
+        .then(async function(res)
         {
             if(res.status === 201) {
-                alert("Projet créé !");
+                await Swal.fire({
+                    icon: "success",
+                    text: "Projet créé !"
+                });
                 document.location.href = "myprojects.html";
             }else
-                alert(res.statusText);
+                await Swal.fire({
+                    icon: "error",
+                    text: res.statusText
+                });
         }).catch(function(err){
             console.log(err.message);
     });

@@ -14,7 +14,7 @@ const url = backUrl+"issue?id=";
 const id = readCookie("id");
 
 fetch(url + id)
-    .then(function (res) {
+    .then(async function (res) {
         if (res.status === 200) {
             res.json().then(function (datas) {
                 datas.forEach(elem => {
@@ -68,7 +68,10 @@ fetch(url + id)
                 });
             });
         } else
-            alert(res.statusText);
+            await Swal.fire({
+                icon: "error",
+                text: res.statusText
+            });
     }).catch(function (err) {
     console.log(err.message);
 });

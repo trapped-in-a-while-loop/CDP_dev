@@ -9,9 +9,9 @@ function readCookie(name) {
     return null;
 }
 
-fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(function(res){
+fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(async function(res){
     let cpt=0;
-    res.json().then(function(res) {
+    res.json().then(async function(res) {
         res[0]["Developpeurs"].forEach(dev => {
             let oneDev = document.createElement("p");
             const content = dev["Login"] + ", " + dev["Nom"] + ", " + dev["Prenom"];
@@ -114,13 +114,19 @@ function onClickClient() {
         };
 
         fetch(url, my_init)
-            .then(function (res) {
+            .then(async function (res) {
                 if (res.status === 201) {
-                    alert("Client ajouté");
+                    await Swal.fire({
+                        icon: "error",
+                        text: "Client ajouté"
+                    });
                     document.location.reload();
                 }
                 else
-                    alert(res.statusText);
+                    await Swal.fire({
+                        icon: "error",
+                        text: res.statusText
+                    });
             }).catch(function (err) {
             console.log(err.message);
         });

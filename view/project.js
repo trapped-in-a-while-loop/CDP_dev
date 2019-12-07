@@ -14,14 +14,17 @@ const url = backUrl+"project/id";
 const id = readCookie("id");
 
 fetch(url + "?id=" + id)
-    .then(function (res) {
+    .then(async function (res) {
         if (res.status === 200) {
             res.json().then(function (datas) {
                 document.querySelector("#titre").innerHTML = datas[0]["Titre"];
                 document.querySelector("#description").innerHTML = datas[0]["Description"];
             });
         } else
-            alert(res.statusText);
+            await Swal.fire({
+                icon: "error",
+                text: res.statusText
+            });
     }).catch(function (err) {
     console.log(err.message);
 });

@@ -12,7 +12,7 @@ function readCookie(name) {
 document.querySelector("#cancel").addEventListener("click", onClick);
 document.querySelector("#save").addEventListener("click", onClickOk);
 
-fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(function (res){
+fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(async function (res){
     if(res.status === 200){
         res.json().then(function(data){
             const title = data[0]["Titre"];
@@ -20,9 +20,11 @@ fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(function (re
             document.querySelector("#titre").value = title;
             document.querySelector("#description").value = description;
         });
-    }else{
-        alert(res.statusText);
-    }
+    }else
+        await Swal.fire({
+            icon: "error",
+            text: res.statusText
+        });
 }).catch(function(err){
     console.log(err.message);
 });
@@ -49,14 +51,20 @@ function onClickOk() {
         };
 
         fetch(url, my_init)
-            .then(function (res) {
+            .then(async function (res) {
                 if (res.status === 200) {
-                    alert("Projet modifié");
+                    await Swal.fire({
+                        icon: "success",
+                        text: "Projet modifié"
+                    });
                     document.cookie = "id=no_id; expires=Fri, 01 Jan 2010 00:0:00 UTC; path=./*";
                     document.location.href = "myprojects.html";
                 }
                 else
-                    alert(res.statusText);
+                    await Swal.fire({
+                        icon: "error",
+                        text: res.statusText
+                    });
             }).catch(function (err) {
             console.log(err.message);
         });

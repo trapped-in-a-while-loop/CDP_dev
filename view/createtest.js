@@ -33,13 +33,19 @@ function onClick() {
     };
 
     fetch(url, my_init)
-        .then(function(res)
+        .then(async function(res)
         {
             if (res.status === 201) {
-                alert("Test créé !");
+                await Swal.fire({
+                    icon: "success",
+                    text: "Test créé !"
+                });
                 document.location.href = "test.html";
             }else
-                alert(res.statusText);
+                await Swal.fire({
+                    icon: "error",
+                    text: res.statusText
+                });
         }).catch(function (err) {
             console.log(err.message);
         });

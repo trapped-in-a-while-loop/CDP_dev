@@ -34,13 +34,19 @@ function onClick()
     };
 
     fetch(url, my_init)
-        .then(function(res)
+        .then(async function(res)
         {
             if (res.status === 201) {
-                alert("Tâche créée !");
+                await Swal.fire({
+                    icon: "success",
+                    text: "Tâche créée !"
+                });
                 document.location.href = "task.html";
             }else
-                alert (res.statusText);
+                await Swal.fire({
+                    icon: "error",
+                    text: res.statusText
+                });
         }).catch(function (err) {
             console.log(err.message);
         });

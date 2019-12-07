@@ -11,16 +11,18 @@ function onClick()
     const mdp = document.getElementById("password").value;
 
     fetch(url+"?login="+login+"&mdp="+mdp)
-        .then(function(res)
+        .then(async function(res)
         {
             if(res.status === 200){
                 document.cookie = "login="+login+"; path=./*";
                 document.cookie = "mdp="+mdp+"; path=./*";
-                alert("CONNECTE");
                 document.location.href = "index.html";
             }
             else
-                alert(res.statusText);
+                await Swal.fire({
+                    icon: "error",
+                    text: res.statusText
+                });
         }).catch(function(err){
             console.log(err.message);
     });
