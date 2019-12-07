@@ -1,16 +1,14 @@
-document.querySelector('#aut').addEventListener('click', onClick);
+document.querySelector("#aut").addEventListener("click", onClick);
 
 function onClick()
 {
-    const url = backUrl+'user';
+    const url = backUrl+"user";
 
     const my_headers = new Headers();
     my_headers.append("Content-Type", "application/json");
 
-    const login = document.getElementById('login').value;
-    const mdp = document.getElementById('password').value;
-
-    var params = {login:login, mdp:mdp};
+    const login = document.getElementById("login").value;
+    const mdp = document.getElementById("password").value;
 
     fetch(url+"?login="+login+"&mdp="+mdp)
         .then(function(res)

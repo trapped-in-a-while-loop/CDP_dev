@@ -1,15 +1,15 @@
 function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)===' ') c = c.substring(1,c.length);
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(";");
+    for(let i=0;i < ca.length;i++) {
+        let c = ca[i];
+        while (c.charAt(0)===" ") c = c.substring(1,c.length);
         if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
     }
     return null;
 }
 
-const url = backUrl+'project/';
+const url = backUrl+"project/";
 
 const login = readCookie("login");
 
@@ -23,7 +23,7 @@ fetch(url + "proprietaire?login=" + login)
             res.json().then(function (datas) {
                 data = data.concat(datas);
                 datas.forEach(item => {
-                    var titre = document.createElement("a");
+                    let titre = document.createElement("a");
                     titre.setAttribute("type", "button");
                     titre.setAttribute("id", "titre_"+cpt);
                     titre.setAttribute("class", "btn btn-link");
@@ -47,7 +47,7 @@ fetch(url + "proprietaire?login=" + login)
                     manageButton.setAttribute("class", "btn btn-info");
                     manageButton.innerHTML = "Gérer";
 
-                    document.addEventListener('click', function(e){
+                    document.addEventListener("click", function(e){
                         if(e.target && e.target.id.split("_")[0].localeCompare("delete")===0) {
                             const index = parseInt(e.target.id.split("_")[1], 10);
                             const id = data[index]["_id"];
@@ -73,7 +73,7 @@ fetch(url + "proprietaire?login=" + login)
                         }
                     });
 
-                    document.querySelector('#projects').append(titre, deleteButton, editButton, manageButton);
+                    document.querySelector("#projects").append(titre, deleteButton, editButton, manageButton);
                     document.querySelector("#projects").append(document.createElement("br"));
                     cpt ++;
                 });
@@ -90,9 +90,8 @@ function displayNoOwnerProjects(addr, role) {
             if (res.status === 200) {
                 res.json().then(function (datas) {
                     data = data.concat(datas);
-                    var result = "";
                     datas.forEach(item => {
-                        var titre = document.createElement("a");
+                        let titre = document.createElement("a");
                         titre.setAttribute("type", "button");
                         titre.setAttribute("id", "titre_"+cpt);
                         titre.setAttribute("class", "btn btn-link");

@@ -1,22 +1,22 @@
 function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)===' ') c = c.substring(1,c.length);
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(";");
+    for(let i=0;i < ca.length;i++) {
+        let c = ca[i];
+        while (c.charAt(0)===" ") c = c.substring(1,c.length);
         if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
     }
     return null;
 }
 
 fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(function(res){
-    var cpt=0;
+    let cpt=0;
     res.json().then(function(res) {
         res[0]["Developpeurs"].forEach(dev => {
-            var oneDev = document.createElement("p");
-            var content = dev["Login"] + ", " + dev["Nom"] + ", " + dev["Prenom"];
+            let oneDev = document.createElement("p");
+            const content = dev["Login"] + ", " + dev["Nom"] + ", " + dev["Prenom"];
             oneDev.innerHTML = content;
-            var but = document.createElement("a");
+            let but = document.createElement("a");
             but.type = "button";
             but.className = "btn btn-danger";
             but.href = "deletemember.html";
@@ -27,10 +27,10 @@ fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(function(res
             cpt++;
         });
         res[0]["Clients"].forEach(client => {
-            var oneClient = document.createElement("p");
-            var content = client["Login"] + ", " + client["Nom"] + ", " + client["Prenom"];
+            let oneClient = document.createElement("p");
+            const content = client["Login"] + ", " + client["Nom"] + ", " + client["Prenom"];
             oneClient.innerHTML = content;
-            var but = document.createElement("a");
+            let but = document.createElement("a");
             but.type = "button";
             but.className = "btn btn-danger";
             but.href = "deletemember.html";
@@ -40,7 +40,7 @@ fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(function(res
             document.querySelector("#clients").appendChild(oneClient);
             cpt++;
         });
-        document.addEventListener('click', function(e){
+        document.addEventListener("click", function(e){
             if(e.target && e.target.id.split("_")[0].localeCompare("delDev")===0) {
                 const index = parseInt(e.target.id.split("_")[1], 10);
                 const login = res[0]["Developpeurs"][index];
@@ -62,20 +62,20 @@ document.querySelector("#saveClient").addEventListener("click", onClickClient);
 
 function onClickDeveloppeur() {
     if (document.cookie.includes("id=")){
-        const url = backUrl+'project/developpeur';
+        const url = backUrl+"project/developpeur";
         const my_headers = new Headers();
         my_headers.append("Content-Type", "application/json");
 
         const id = readCookie("id");
         const developpeur = document.querySelector("#developpeur").value;
 
-        var params = { id: id, developpeur: developpeur };
+        const params = { id: id, developpeur: developpeur };
 
-        var my_init = {
-            method: 'PUT',
+        const my_init = {
+            method: "PUT",
             headers: my_headers,
-            mode: 'cors',
-            cache: 'default',
+            mode: "cors",
+            cache: "default",
             body: JSON.stringify(params)
         };
 
@@ -96,20 +96,20 @@ function onClickDeveloppeur() {
 function onClickClient() {
     if (document.cookie.includes("id=")) {
 
-        const url = backUrl+'project/client';
+        const url = backUrl+"project/client";
         const my_headers = new Headers();
         my_headers.append("Content-Type", "application/json");
 
         const id = readCookie("id");
         const client = document.querySelector("#client").value;
 
-        var params = { id: id, client: client };
+        const params = { id: id, client: client };
 
-        var my_init = {
-            method: 'PUT',
+        const my_init = {
+            method: "PUT",
             headers: my_headers,
-            mode: 'cors',
-            cache: 'default',
+            mode: "cors",
+            cache: "default",
             body: JSON.stringify(params)
         };
 
@@ -128,6 +128,6 @@ function onClickClient() {
 }
 
 function onClick(){
-    document.cookie = 'id=no_id; expires=Fri, 01 Jan 2010 00:0:00 UTC; path=./*';
+    document.cookie = "id=no_id; expires=Fri, 01 Jan 2010 00:0:00 UTC; path=./*";
     document.location.href = "myprojects.html";
 }
