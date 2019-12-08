@@ -6,7 +6,7 @@ const url_home = "https://cdp-ropert-dupland-tomas.000webhostapp.com/";
 let browser;
 let page;
 
-(async () => {
+const test = async () => {
 
   const test_login = async () => {
 
@@ -46,4 +46,6 @@ let page;
   await test_login();
   await test_logout();
   await browser.close();
-});
+};
+
+test();
