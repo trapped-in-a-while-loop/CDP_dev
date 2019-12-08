@@ -39,20 +39,20 @@ const test_login = async () => {
 
 test_login();*/
 
-const browser;
-const page;
+let browser;
+let page;
 
-before(async () => {
-    browser = await puppeteer.launch();
-    page = await browser.newPage();
-    page.on("dialog", async dialog => {
-        await dialog.dismiss();
-    });
-});
+const test_init = async () => {
+  browser = await puppeteer.launch();
+  page = await browser.newPage();
+  page.on("dialog", async dialog => {
+    await dialog.dismiss();
+  });
+};
 
-after(async () => {
+const test_end = async () => {
     await browser.close();
-});
+};
 
 const test_login = async () => {
     await page.goto(url_home);
@@ -80,6 +80,7 @@ const test_logout = async () => {
     console.log("Test deconnect passed");
 };
 
-test_login().then(
-  test_logout();
-);
+test_init.then(
+  test_login())
+  .then(test_logout())
+  .then(test_end());
