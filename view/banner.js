@@ -13,8 +13,8 @@ if(document.cookie.includes("login=")){
         "                        data-toggle=\"dropdown\">Mon compte\n" +
         "                        <span class=\"caret\"></span></button>\n" +
         "                    <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"menu1\">\n" +
-        "                        <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"myaccount.html\">Mon profil</a></li>\n" +
-        "                        <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"myprojects.html\">Mes projets</a></li>\n" +
+        "                        <li id=\"myaccount\" role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"myaccount.html\">Mon profil</a></li>\n" +
+        "                        <li id=\"myprojects\" role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"myprojects.html\">Mes projets</a></li>\n" +
         "                    </ul>\n" +
         "                </div>\n" +
         "            </div>\n" +
