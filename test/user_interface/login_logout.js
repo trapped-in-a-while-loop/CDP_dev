@@ -80,7 +80,11 @@ const test_logout = async () => {
     console.log("Test deconnect passed");
 };
 
-test_init.then(
-  test_login())
-  .then(test_logout())
-  .then(test_end());
+const test = async () => {
+  await test_init();
+  await test_login();
+  await test_logout();
+  await test_end();
+};
+
+test();
