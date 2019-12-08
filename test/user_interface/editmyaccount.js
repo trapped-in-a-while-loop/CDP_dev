@@ -1,7 +1,7 @@
 const assert = require("assert");
 const puppeteer = require("puppeteer");
 const mongoose = require("mongoose");
-const project = require("../../model/project");
+const user = require("../../model/user");
 
 const stringConnect = "mongodb+srv://dropert:SXlUQZIM1vQfImm2@progweb-hnise.gcp.mongodb.net/cdp?retryWrites=true&w=majority";
 
@@ -16,15 +16,15 @@ function rdString(length) {
 
 const url_home = "https://cdp-ropert-dupland-tomas.000.webhostapp.com/";
 
-const test_createproject = async () => {
-    const string_title = rdString((Math.random() * 8) + 1);
-    const string_desc = rdString((Math.random() * 50) + 1);
+const test_editmyaccount = async () => {
+    const string = rdString((Math.random() * 8) + 1);
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
     page.on("dialog", async dialog => {
         await dialog.dismiss();
     });
     await page.goto(url_home);
+
     await page.waitFor("#connexion");
     await page.click("#connexion");
 
@@ -41,21 +41,20 @@ const test_createproject = async () => {
     await page.waitFor("#menu1");
     await page.click("#menu1");
 
-    await page.waitFor("#myprojects");
-    await page.click("#myprojects");
+    await page.waitFor("#myaccount");
+    await page.click("#myaccount");
 
     await page.waitFor("body");
 
-    await page.waitFor("#createprojects");
-    await page.click("#createpojects");
+    await page.type("#nom", string);
+    await page.type("#prenom", string);
+    await page.type("#mail", string + "@" + string);
+    await page.type("#login", "test");
+    await page.type("#password", "test");
+    await page.type("#societe", string);
 
-    await page.waitFor("body");
-
-    await page.type("#titre", string_title);
-    await page.type("#description", string_desc);
-
-    await page.waitFor("#create");
-    await page.click("#create");
+    await page.waitFor("#save");
+    await page.click("#save");
     await page.waitForNavigation({waitUntil: 'load'});
 
     const url_nextPage = await page.url();
@@ -66,22 +65,23 @@ const test_createproject = async () => {
         if (err) {
         mongoose.connection.close();
         } else {
-        project.projectModel.find({ Titre: string_title, Description: string_desc, Proprietaire: "test" },
+        user.userModel.find({ Login : "test" },
             function (err, doc) {
               if (err) { mongoose.connection.close(); } else {
-                assert(doc.length === 1);
-                assert(doc[0].Titre === string_title);
-                assert(doc[0].Description === string_desc);
-                assert(doc[0].Proprietaire === "test");
-                assert(doc[0].Clients.length === 0);
-                assert(doc[0].Developpeurs.length === 0);
-                assert(url_nextPage === url_home + "myprojects.html");
-                console.log("Test create project passed");
-                mongoose.connection.close();
+                  assert(doc.length === 1);
+                  assert(doc[0].Nom === string);
+                  assert(doc[0].Prenom === string);
+                  assert(doc[0].Mail === string + "@" + string);
+                  assert(doc[0].Societe === string);
+                  assert(doc[0].Login === "test");
+                  assert(doc[0].Password === "test");
+                  assert(url_nextPage === url_home + "index.html");
+                  console.log("Test edit my account passed");
+                  mongoose.connection.close();
               }
             });
         }
     });
 }
 
-test_createproject();
+test_editmyaccount();
