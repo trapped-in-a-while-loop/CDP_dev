@@ -212,7 +212,7 @@ route.put("/", function (req, res) {
                         {
                             Titre : titre,
                             Description : description
-                        }, function(err, result){
+                        }, function(err){
                         if(err){
                             mongoose.connection.close();
                             res.statusMessage = "Echec de la mise à jour du projet";
@@ -227,6 +227,19 @@ route.put("/", function (req, res) {
         }
     });
 });
+
+function checkRole(user, doc, res){
+    if(doc.Clients.find(element => element.Login.localeCompare(user)===0) !== undefined) {
+        mongoose.connection.close();
+        res.statusMessage = "Ce compte est déjà un client";
+        return false;
+    }if(doc.Developpeurs.find(element => element.Login.localeCompare(user)===0) !== undefined) {
+        mongoose.connection.close();
+        res.statusMessage = "Ce compte est déjà un client";
+        return false;
+    }
+    return true;
+}
 
 route.put("/developpeur", function (req, res) {
     return mongoose.connect(stringConnect, {useNewUrlParser:true, useUnifiedTopology: true}, function(err){
@@ -246,16 +259,9 @@ route.put("/developpeur", function (req, res) {
                         res.statusMessage = "Le proprietaire ne peut être développeur";
                         return res.status(500).end();
                     }
-                    if(doc.Clients.find(element => element.Login.localeCompare(developpeur)===0) !== undefined){
-                        mongoose.connection.close();
-                        res.statusMessage = "Ce compte est déjà un client";
+                    let userOk = checkRole(developpeur, doc, res);
+                    if(!userOk)
                         return res.status(500).end();
-                    }
-                    if(doc.Developpeurs.find(element => element.Login.localeCompare(developpeur)===0) !== undefined){
-                        mongoose.connection.close();
-                        res.statusMessage = "Ce compte est déjà un développeur";
-                        return res.status(500).end();
-                    }
                     user.userModel.findOne({Login:developpeur}, function(err, dev){
                         if(err){
                             mongoose.connection.close();
@@ -302,19 +308,12 @@ route.put("/client", function (req, res) {
                     const client = req.body.client;
                     if(doc.Proprietaire.Login.localeCompare(client)===0){
                         mongoose.connection.close();
-                        res.statusMessage = "Le proprietaire ne peut être développeur";
+                        res.statusMessage = "Le proprietaire ne peut être client";
                         return res.status(500).end();
                     }
-                    if(doc.Clients.find(element => element.Login.localeCompare(client)===0) !== undefined){
-                        mongoose.connection.close();
-                        res.statusMessage = "Ce compte est déjà un client";
+                    let userOk = checkRole(client, doc, res);
+                    if(!userOk)
                         return res.status(500).end();
-                    }
-                    if(doc.Developpeurs.find(element => element.Login.localeCompare(client)===0) !== undefined){
-                        mongoose.connection.close();
-                        res.statusMessage = "Ce compte est déjà un développeur";
-                        return res.status(500).end();
-                    }
                     user.userModel.findOne({Login:client}, function(err, client){
                         if(err){
                             mongoose.connection.close();

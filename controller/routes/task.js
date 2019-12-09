@@ -64,12 +64,12 @@ route.put("/", function (req, res) {
       res.statusMessage = errorConnect;
       return res.status(500).end();
     }else {
-      task.taskModel.findOne({_id:req.body.id}, function (err, doc) {
+      task.taskModel.findOne({_id:req.body.id}, function (err) {
         if (err) {
           mongoose.connection.close();
           res.statusMessage = "Echec vérification id projet";
           return res.status(500).end();
-        }else {
+        }else{
           const titre = req.body.titre;
           const description = req.body.description;
           const statut = req.body.statut;

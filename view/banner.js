@@ -36,7 +36,7 @@ if(document.cookie.includes("login=")){
         "                    <a id=\"inscription\" class=\"btn btn-success btn-sm ml-3\" href=\"signup.html\">\n" +
         "                        <i class=\"fa fa-pencil\"></i> Inscription\n" +
         "                    </a>\n" +
-        "                    <a id=\"connexion\"class=\"btn btn-success btn-sm ml-3\" href=\"login.html\">\n" +
+        "                    <a id=\"connexion\" class=\"btn btn-success btn-sm ml-3\" href=\"login.html\">\n" +
         "                        <i class=\"fa fa-lock\"></i> Connexion\n" +
         "                    </a>\n" +
         "                </form>\n" +

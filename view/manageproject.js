@@ -1,42 +1,26 @@
-function readCookie(name) {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(";");
-    for(let i=0;i < ca.length;i++) {
-        let c = ca[i];
-        while (c.charAt(0)===" ") c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
+function createElemMember(member, id, cpt){
+    let oneMember = document.createElement("p");
+    oneMember.innerHTML = member["Login"] + ", " + member["Nom"] + ", " + member["Prenom"];
+    let but = document.createElement("a");
+    but.type = "button";
+    but.className = "btn btn-danger";
+    but.href = "deletemember.html";
+    but.innerHTML = "Supprimer";
+    but.id = id+cpt;
+    oneMember.appendChild(but);
+    return oneMember;
 }
 
 fetch("http://localhost:3000/project/id?id="+readCookie("id")).then(async function(res){
     let cpt=0;
     res.json().then(async function(res) {
         res[0]["Developpeurs"].forEach(dev => {
-            let oneDev = document.createElement("p");
-            const content = dev["Login"] + ", " + dev["Nom"] + ", " + dev["Prenom"];
-            oneDev.innerHTML = content;
-            let but = document.createElement("a");
-            but.type = "button";
-            but.className = "btn btn-danger";
-            but.href = "deletemember.html";
-            but.innerHTML = "Supprimer";
-            but.id = "delDev_"+cpt;
-            oneDev.appendChild(but);
+            let oneDev = createElemMember(dev, "delDev_", cpt);
             document.querySelector("#devs").appendChild(oneDev);
             cpt++;
         });
         res[0]["Clients"].forEach(client => {
-            let oneClient = document.createElement("p");
-            const content = client["Login"] + ", " + client["Nom"] + ", " + client["Prenom"];
-            oneClient.innerHTML = content;
-            let but = document.createElement("a");
-            but.type = "button";
-            but.className = "btn btn-danger";
-            but.href = "deletemember.html";
-            but.innerHTML = "Supprimer";
-            but.id = "delClient_"+cpt;
-            oneClient.appendChild(but);
+            let oneClient = createElemMember(client, "delClient_", cpt);
             document.querySelector("#clients").appendChild(oneClient);
             cpt++;
         });
