@@ -64,7 +64,7 @@ route.put("/", function (req, res) {
             res.statusMessage = errorConnect;
             return res.status(500).end();
         } else {
-            test.testModel.findOne({ _id: req.body.id }, function (err, doc) {
+            test.testModel.findOne({ _id: req.body.id }, function (err) {
                 if (err) {
                     mongoose.connection.close();
                     res.statusMessage = "Echec vérification id projet";
@@ -78,7 +78,7 @@ route.put("/", function (req, res) {
                             testGiven: testgiven,
                             testWhen: testwhen,
                             testThen: testthen
-                        }, function (err, result) {
+                        }, function (err) {
                             if (err) {
                                 mongoose.connection.close();
                                 res.statusMessage = "Echec de la mise à jour du test";

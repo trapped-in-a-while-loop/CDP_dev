@@ -122,7 +122,7 @@ route.put("/", function (req, res) {
                             Mail : mail,
                             Societe :societe,
                             Login : login,
-                            Password : mdp}, function(err, result){
+                            Password : mdp}, function(err){
                             if(err){
                                 mongoose.connection.close();
                                 res.statusMessage = "Echec de la mise à jour du compte";
