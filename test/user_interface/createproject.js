@@ -39,12 +39,10 @@ const test = async () => {
 
         await page.waitFor("#menu1");
         await page.click("#menu1");
+        await page.click("a[href='myprojects.html']");
 
-        await page.waitFor("#myprojects");
-        await page.select("#myprojects");
-
-        await page.waitFor("#createprojects");
-        await page.click("#createpojects");
+        await page.waitFor("body");
+        await page.click("a[href='createproject.html']");
 
         await page.waitFor("body");
 
@@ -52,9 +50,13 @@ const test = async () => {
         await page.type("#description", string_desc);
 
         await page.waitFor("#create");
-        await page.click("#create");
+        const wait1 = page.waitForNavigation();
 
-        await page.waitForNavigation({ waitUntil: "load" });
+        await page.click("#create");
+        await page.waitFor(".swal2-confirm");
+        await page.click(".swal2-confirm");
+
+        await wait1;
 
         const url_nextPage = await page.url();
 
