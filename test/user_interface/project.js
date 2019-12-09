@@ -60,26 +60,25 @@ const test = async () => {
 
         const url_nextPage = await page.url();
 
-        await browser.close();
-
         await mongoose.connect(stringConnect, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
             if (err) {
                 mongoose.connection.close();
             } else {
-                project.projectModel.find({ Titre: string_title, Description: string_desc, Proprietaire: "test" },
+                project.projectModel.find({ Titre: string_title, Description: string_desc },
                     function (err, doc) {
                         if (err) { mongoose.connection.close(); } else {
                             assert(doc.length === 1);
                             assert(doc[0].Titre === string_title);
                             assert(doc[0].Description === string_desc);
-                            assert(doc[0].Proprietaire === "test");
+                            assert(doc[0].Proprietaire.Login === "test");
                             assert(doc[0].Clients.length === 0);
                             assert(doc[0].Developpeurs.length === 0);
                             assert(url_nextPage === url_home + "myprojects.html");
                             console.log("Test create project passed");
                             mongoose.connection.close();
                         }
-                    });
+                    }
+                );
             }
         });
     };
