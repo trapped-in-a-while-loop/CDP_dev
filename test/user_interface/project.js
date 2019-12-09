@@ -83,10 +83,51 @@ const test = async () => {
         });
     };
 
-    browser = await puppeteer.launch({ headless: false, args: ["--no-sandbox"], slowMo: 1 });
+    const test_editproject = async () => {
+
+        await page.waitFor("#edit_0");
+        await page.click("#edit_0");
+
+        await page.waitFor("body");
+
+        await page.type("#titre", string_title + "_modified");
+        await page.type("#description", string_desc + "_modified");
+
+        await page.waitFor("#save");
+        const wait = page.waitForNavigation();
+        await page.click("#save");
+
+        await page.waitFor(".swal2-confirm");
+        await page.click(".swal2-confirm");
+        await wait;
+
+        const url_nextPage = await page.url();
+
+        await mongoose.connect(stringConnect, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+            if (err) {
+                mongoose.connection.close();
+            } else {
+                project.projectModel.find({ Titre: string_title + "_modified", Description: string_desc + "_modified" },
+                    function (err, doc) {
+                        if (err) { mongoose.connection.close(); } else {
+                            assert(doc.length === 1);
+                            assert(doc[0].Titre === string_title + "_modified");
+                            assert(doc[0].Description === string_desc + "_modified");
+                            assert(doc[0].Proprietaire.Login === "test");
+                            assert(url_nextPage === url_home + "myprojects.html");
+                            console.log("Test edit project passed");
+                            mongoose.connection.close();
+                        }
+                    }
+                );
+            }
+        });
+    };
+
+    browser = await puppeteer.launch({ headless: true, args: ["--no-sandbox"], slowMo: 1 });
     page = await browser.newPage();
     page.goto(url_home);
-    await Promise.all([test_createproject()]);
+    await Promise.all([test_createproject(), test_editproject()]);
     await browser.close();
 };
 

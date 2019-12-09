@@ -10,11 +10,11 @@ Test3 : Changer mes informations
         -> Je remplace mes valeurs par d'autres : V
         -> Je remplace mes valeurs par rien : X
 
-Test4 : Créer un projet
+Test4 : Créer un projet V
         -> Je met un titre : V
         -> Je ne met pas de titre : X
 
-Test5 : Éditer un projet
+Test5 : Éditer un projet V
         -> Je remplace le titre par un titre valide : V
         -> Je remplace le titre par un titre vide : X
 
