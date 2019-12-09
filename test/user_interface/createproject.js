@@ -14,74 +14,79 @@ function rdString(length) {
     return result;
 }
 
-const url_home = "https://cdp-ropert-dupland-tomas.000.webhostapp.com/";
+let browser;
+let page;
+const string_title = rdString((Math.random() * 8) + 1);
+const string_desc = rdString((Math.random() * 50) + 1);
+const url_home = "https://cdp-ropert-dupland-tomas.000webhostapp.com/";
 
-const test_createproject = async () => {
-    const string_title = rdString((Math.random() * 8) + 1);
-    const string_desc = rdString((Math.random() * 50) + 1);
-    const browser = await puppeteer.launch({headless: false});
-    const page = await browser.newPage();
-    page.on("dialog", async dialog => {
-        await dialog.dismiss();
-    });
-    await page.goto(url_home);
-    await page.waitFor("#connexion");
-    await page.click("#connexion");
+const test = async () => {
 
-    await page.waitFor("body");
+    const test_createproject = async () => {
 
-    await page.type("#login", "test");
-    await page.type("#password", "test");
+        await page.waitFor("#connexion");
+        await page.click("#connexion");
 
-    await page.waitFor("#aut");
-    await page.click("#aut");
+        await page.waitFor("body");
 
-    await page.waitFor("body");
+        await page.type("#login", "test");
+        await page.type("#password", "test");
 
-    await page.waitFor("#menu1");
-    await page.click("#menu1");
+        await page.waitFor("#aut");
+        const wait = page.waitForNavigation();
+        await page.click("#aut");
+        await wait;
 
-    await page.waitFor("#myprojects");
-    await page.click("#myprojects");
+        await page.waitFor("#menu1");
+        await page.click("#menu1");
 
-    await page.waitFor("body");
+        await page.waitFor("#myprojects");
+        await page.select("#myprojects");
 
-    await page.waitFor("#createprojects");
-    await page.click("#createpojects");
+        await page.waitFor("#createprojects");
+        await page.click("#createpojects");
 
-    await page.waitFor("body");
+        await page.waitFor("body");
 
-    await page.type("#titre", string_title);
-    await page.type("#description", string_desc);
+        await page.type("#titre", string_title);
+        await page.type("#description", string_desc);
 
-    await page.waitFor("#create");
-    await page.click("#create");
-    await page.waitForNavigation({waitUntil: 'load'});
+        await page.waitFor("#create");
+        await page.click("#create");
 
-    const url_nextPage = await page.url();
+        await page.waitForNavigation({ waitUntil: "load" });
 
-    await browser.close();
+        const url_nextPage = await page.url();
 
-    await mongoose.connect(stringConnect, {useNewUrlParser: true, useUnifiedTopology: true}, function (err) {
-        if (err) {
-        mongoose.connection.close();
-        } else {
-        project.projectModel.find({ Titre: string_title, Description: string_desc, Proprietaire: "test" },
-            function (err, doc) {
-              if (err) { mongoose.connection.close(); } else {
-                assert(doc.length === 1);
-                assert(doc[0].Titre === string_title);
-                assert(doc[0].Description === string_desc);
-                assert(doc[0].Proprietaire === "test");
-                assert(doc[0].Clients.length === 0);
-                assert(doc[0].Developpeurs.length === 0);
-                assert(url_nextPage === url_home + "myprojects.html");
-                console.log("Test create project passed");
+        await browser.close();
+
+        await mongoose.connect(stringConnect, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+            if (err) {
                 mongoose.connection.close();
-              }
-            });
-        }
-    });
-}
+            } else {
+                project.projectModel.find({ Titre: string_title, Description: string_desc, Proprietaire: "test" },
+                    function (err, doc) {
+                        if (err) { mongoose.connection.close(); } else {
+                            assert(doc.length === 1);
+                            assert(doc[0].Titre === string_title);
+                            assert(doc[0].Description === string_desc);
+                            assert(doc[0].Proprietaire === "test");
+                            assert(doc[0].Clients.length === 0);
+                            assert(doc[0].Developpeurs.length === 0);
+                            assert(url_nextPage === url_home + "myprojects.html");
+                            console.log("Test create project passed");
+                            mongoose.connection.close();
+                        }
+                    });
+            }
+        });
+    };
 
-test_createproject();
+    browser = await puppeteer.launch({ headless: false, args: ["--no-sandbox"], slowMo: 1 });
+    page = await browser.newPage();
+    page.goto(url_home);
+    await Promise.all([test_createproject()]);
+    await browser.close();
+};
+
+test();
