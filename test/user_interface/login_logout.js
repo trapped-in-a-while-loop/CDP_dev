@@ -10,7 +10,6 @@ const test = async () => {
 
   const test_login = async () => {
 
-    page.goto(url_home);
     await page.waitFor("#connexion");
     await page.click("#connexion");
 
@@ -20,7 +19,9 @@ const test = async () => {
     await page.type("#password", "test");
 
     await page.waitFor("#aut");
-    await page.click("#aut").then(() => page.waitForNavigation({waitUntil: "load"})); 
+    const wait = page.waitForNavigation();
+    await page.click("#aut");
+    await wait; 
 
     const url_nextPage = await page.url();
 
@@ -40,11 +41,9 @@ const test = async () => {
 
   browser = await puppeteer.launch({headless : true, args: ["--no-sandbox"]});
   page = await browser.newPage();
-/*  page.on("dialog", async dialog => {
-    await dialog.dismiss();
-  });*/
-  await test_login();
-  await test_logout();
+  page.goto(url_home);
+  await Promise.all([test_login(), test_logout()]);
+  await page.close();
   await browser.close();
 };
 
