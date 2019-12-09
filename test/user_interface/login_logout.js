@@ -39,11 +39,10 @@ const test = async () => {
 
   };
 
-  browser = await puppeteer.launch({headless : true, args: ["--no-sandbox"]});
+  browser = await puppeteer.launch({headless : true, args: ["--no-sandbox"], slowMo:1});
   page = await browser.newPage();
   page.goto(url_home);
   await Promise.all([test_login(), test_logout()]);
-  await page.close();
   await browser.close();
 };
 
