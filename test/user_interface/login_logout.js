@@ -10,7 +10,7 @@ const test = async () => {
 
   const test_login = async () => {
 
-    await page.goto(url_home);
+    page.goto(url_home);
     await page.waitFor("#connexion");
     await page.click("#connexion");
 
@@ -20,8 +20,8 @@ const test = async () => {
     await page.type("#password", "test");
 
     await page.waitFor("#aut");
-    await page.click("#aut");
-    await page.waitForNavigation({waitUntil: 'load'});
+    await page.click("#aut").then(() => page.waitForNavigation({waitUntil: "load"})); 
+
     const url_nextPage = await page.url();
 
     assert(url_nextPage === url_home + "index.html");
@@ -38,7 +38,7 @@ const test = async () => {
 
   };
 
-  browser = await puppeteer.launch({headless : true});
+  browser = await puppeteer.launch({headless : true, args: ["--no-sandbox"]});
   page = await browser.newPage();
 /*  page.on("dialog", async dialog => {
     await dialog.dismiss();
