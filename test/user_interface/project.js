@@ -122,13 +122,67 @@ const test = async () => {
                 );
             }
         });
+
+        await page.waitFor("body");
+        
+        const index = await page.evaluate((string_title) => {
+            let projects = document.querySelectorAll("[id^=\"titre_\"]");
+            let index = projects.findIndex(element => (element.localeCompare(string_title) === 0));
+            return index;
+        });
+
+        console.log(index);
+        
+
+        //await page.waitFor("#manage_" + index);
+        //await page.click("#manage_" + index);
     };
 
-    browser = await puppeteer.launch({ headless: true, args: ["--no-sandbox"], slowMo: 1 });
+    const test_manageproject = async () => {
+
+        
+
+
+        await page.waitFor("body");
+
+        await page.type("#developpeur", string_title + "_dev");
+
+        await page.waitFor("#saveDeveloppeur");
+        const wait = page.waitForNavigation();
+        await page.click("#saveDeveloppeur");
+        await wait;
+
+        const url_nextPage = await page.url();
+
+        await mongoose.connect(stringConnect, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+            if (err) {
+                mongoose.connection.close();
+            } else {
+                project.projectModel.find({ Titre: string_title + "_modified", Description: string_desc + "_modified" },
+                    function (err, doc) {
+                        if (err) { mongoose.connection.close(); } else {
+                            assert(doc.length === 1);
+                            assert(doc[0].Titre === string_title + "_modified");
+                            assert(doc[0].Description === string_desc + "_modified");
+                            assert(doc[0].Proprietaire.Login === "test");
+                            assert(url_nextPage === url_home + "myprojects.html");
+                            console.log("Test add dev to project passed");
+                            mongoose.connection.close();
+                        }
+                    }
+                );
+            }
+        });
+    };
+
+    browser = await puppeteer.launch({ headless: false, args: ["--no-sandbox"], slowMo: 1 });
     page = await browser.newPage();
     page.goto(url_home);
-    await Promise.all([test_createproject(), test_editproject()]);
-    await browser.close();
+    page.on("dialog", async dialog => {
+        await dialog.dismiss();
+    });
+    await Promise.all([test_createproject(), test_editproject()]);//, test_manageproject()]);
+    //await browser.close();
 };
 
 test();
